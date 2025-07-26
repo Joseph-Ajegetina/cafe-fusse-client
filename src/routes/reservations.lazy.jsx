@@ -18,7 +18,7 @@ function Reservations() {
   })
 
   const createReservationMutation = useCreateReservation()
-  const { data: availableSlots, isLoading: slotsLoading, error: slotsError } = useAvailableSlots(
+  const { data: availableSlots, isLoading: slotsLoading } = useAvailableSlots(
     formData.date,
     parseInt(formData.guests)
   )
@@ -26,16 +26,6 @@ function Reservations() {
   // Fallback time slots when API is unavailable
   const fallbackSlots = ['17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00']
   const timeSlots = availableSlots || fallbackSlots
-
-  // Debug logging
-  console.log('Time Slots Debug:', {
-    date: formData.date,
-    availableSlots,
-    slotsError,
-    slotsLoading,
-    timeSlots,
-    shouldShowSlots: !!formData.date
-  })
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({

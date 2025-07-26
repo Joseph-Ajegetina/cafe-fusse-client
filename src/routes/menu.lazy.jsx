@@ -93,15 +93,6 @@ function Menu() {
   // Use API data if available, otherwise use fallback
   const menuData = menu ? transformApiData(menu) : fallbackMenu
 
-  // Debug logging
-  console.log('Menu Debug:', { 
-    rawMenu: menu, 
-    error, 
-    isLoading, 
-    transformedMenu: menuData, 
-    categoriesLength: menuData?.categories?.length 
-  })
-
   const getDietaryColor = (info) => {
     switch(info) {
       case 'vegetarian': return 'success'
@@ -138,8 +129,7 @@ function Menu() {
     return homeImage
   }
 
-  const handleAddToCart = (item) => {
-    console.log('Adding to cart:', item)
+  const handleAddToCart = (item) => { // eslint-disable-line no-unused-vars
     // TODO: Implement cart functionality
   }
 

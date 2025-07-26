@@ -1,5 +1,4 @@
 import axios from 'axios'
-console.log(import.meta.env.API_URL)
 // Create axios instance with base configuration
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
@@ -9,10 +8,9 @@ const api = axios.create({
   },
 })
 
-// Request interceptor for logging and auth (if needed in future)
+// Request interceptor for auth (if needed in future)
 api.interceptors.request.use(
   (config) => {
-    console.log(`Making ${config.method?.toUpperCase()} request to ${config.url}`)
     return config
   },
   (error) => {
@@ -59,11 +57,6 @@ export const reservationService = {
       num_of_guests: parseInt(reservationData.num_of_guests || reservationData.number_of_guests || reservationData.guests)
     }
     
-    // Debug logging
-    console.log('Reservation API Debug:', {
-      input: reservationData,
-      transformed: backendData
-    })
     const response = await api.post('/reservations', backendData)
     return response.data
   },
@@ -128,6 +121,12 @@ export const newsletterService = {
   // Subscribe to newsletter
   subscribe: async (email) => {
     const response = await api.post('/newsletter/subscribe', { email })
+    
+    // Check if the response indicates the email is already subscribed
+    if (response.data?.message && response.data.message.toLowerCase().includes('already subscribed')) {
+      throw new Error(response.data.message)
+    }
+    
     return response.data
   },
   

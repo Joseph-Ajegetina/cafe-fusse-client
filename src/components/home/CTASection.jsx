@@ -42,7 +42,7 @@ const CTASection = () => {
             {/* Success Message */}
             {newsletterMutation.isSuccess && (
               <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
-                🎉 Thank you for subscribing! Check your email for confirmation.
+                🎉 {newsletterMutation.data?.message || 'Thank you for subscribing! Check your email for confirmation.'}
               </div>
             )}
             
