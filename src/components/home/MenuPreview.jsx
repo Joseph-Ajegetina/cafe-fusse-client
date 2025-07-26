@@ -5,7 +5,7 @@ import { useFeaturedItems } from '../../hooks/useMenu'
 const MenuPreview = () => {
   const { data: featuredData, isLoading } = useFeaturedItems()
 
-  // Fallback featured dishes
+  // Fallback featured dishes with real images
   const fallbackFeaturedDishes = [
     {
       id: 1,
@@ -30,7 +30,7 @@ const MenuPreview = () => {
       description: "12 oz prime cut with garlic mashed potatoes",
       price: "28.00",
       category: "Main Course", 
-      image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+      image: "/src/assets/images/gallery-ribeye-steak.webp",
       chefSpecial: true
     },
     {

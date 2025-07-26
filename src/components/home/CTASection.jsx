@@ -67,14 +67,7 @@ const CTASection = () => {
                     isLoading={newsletterMutation.isPending}
                     isDisabled={newsletterMutation.isPending || !email.trim()}
                   >
-                    {newsletterMutation.isPending ? (
-                      <>
-                        <Spinner size="sm" />
-                        Subscribing...
-                      </>
-                    ) : (
-                      'Subscribe to Newsletter'
-                    )}
+                    {newsletterMutation.isPending ? 'Subscribing...' : 'Subscribe to Newsletter'}
                   </Button>
                 </form>
               )}

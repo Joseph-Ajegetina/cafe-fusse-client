@@ -195,14 +195,7 @@ function Reservations() {
                     isLoading={createReservationMutation.isPending}
                     isDisabled={createReservationMutation.isPending}
                   >
-                    {createReservationMutation.isPending ? (
-                      <>
-                        <Spinner size="sm" />
-                        Making Reservation...
-                      </>
-                    ) : (
-                      'Make Reservation'
-                    )}
+                    {createReservationMutation.isPending ? 'Making Reservation...' : 'Make Reservation'}
                   </Button>
                 </div>
               </div>

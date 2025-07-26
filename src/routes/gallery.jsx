@@ -6,42 +6,42 @@ export const Route = createFileRoute('/gallery')({
 })
 
 function Gallery() {
-  // Placeholder images - in a real app, these would come from your backend/assets
+  // Real restaurant images
   const galleryImages = [
     {
       id: 1,
-      src: "/api/placeholder/400/300",
-      alt: "Restaurant Interior",
+      src: "/src/assets/images/gallery-cafe-interior.webp",
+      alt: "Café Fausse Interior",
       category: "Interior"
     },
     {
       id: 2,
-      src: "/api/placeholder/400/300",
-      alt: "Grilled Salmon Dish",
+      src: "/src/assets/images/gallery-ribeye-steak.webp",
+      alt: "Ribeye Steak - Chef's Special",
       category: "Food"
     },
     {
       id: 3,
-      src: "/api/placeholder/400/300",
-      alt: "Dining Room",
+      src: "/src/assets/images/home-cafe-fausse.webp",
+      alt: "Elegant Dining Room",
       category: "Interior"
     },
     {
       id: 4,
-      src: "/api/placeholder/400/300",
-      alt: "Chef's Special",
-      category: "Food"
+      src: "/src/assets/images/gallery-special-event.webp",
+      alt: "Special Event Setup",
+      category: "Events"
     },
     {
       id: 5,
-      src: "/api/placeholder/400/300",
-      alt: "Wine Selection",
+      src: "/src/assets/images/gallery-cafe-interior.webp",
+      alt: "Bar Area",
       category: "Beverages"
     },
     {
       id: 6,
-      src: "/api/placeholder/400/300",
-      alt: "Private Event",
+      src: "/src/assets/images/gallery-special-event.webp",
+      alt: "Private Dining Experience",
       category: "Events"
     }
   ]
