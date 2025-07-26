@@ -1,39 +1,62 @@
-import { Card, CardBody, Button, Chip } from '@heroui/react'
+import { Card, CardBody, Button, Chip, Spinner } from '@heroui/react'
 import { Link } from '@tanstack/react-router'
+import { useFeaturedItems } from '../../hooks/useMenu'
 
 const MenuPreview = () => {
-  const featuredDishes = [
+  const { data: featuredData, isLoading } = useFeaturedItems()
+
+  // Fallback featured dishes
+  const fallbackFeaturedDishes = [
     {
+      id: 1,
       name: "Grilled Salmon",
       description: "Fresh Atlantic salmon with lemon butter sauce and seasonal vegetables",
-      price: "$22.00",
+      price: "22.00",
       category: "Main Course",
       image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       popular: true
     },
     {
+      id: 2,
       name: "Bruschetta",
       description: "Fresh tomatoes, basil, olive oil, and toasted baguette slices",
-      price: "$8.50",
+      price: "8.50",
       category: "Starter",
       image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     },
     {
+      id: 3,
       name: "Ribeye Steak",
       description: "12 oz prime cut with garlic mashed potatoes",
-      price: "$28.00",
+      price: "28.00",
       category: "Main Course", 
       image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       chefSpecial: true
     },
     {
+      id: 4,
       name: "Tiramisu",
       description: "Classic Italian dessert with mascarpone",
-      price: "$7.50",
+      price: "7.50",
       category: "Dessert",
       image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     }
   ]
+
+  const featuredDishes = featuredData?.items || fallbackFeaturedDishes
+
+  if (isLoading) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-center">
+            <Spinner size="lg" />
+            <p className="mt-4 text-gray-600">Loading featured dishes...</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="py-16 bg-white">
@@ -77,7 +100,7 @@ const MenuPreview = () => {
                       {dish.name}
                     </h3>
                     <span className="font-bold text-amber-600 text-lg">
-                      {dish.price}
+                      ${parseFloat(dish.price).toFixed(2)}
                     </span>
                   </div>
                   

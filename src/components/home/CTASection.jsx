@@ -1,19 +1,21 @@
-import { Card, CardBody, Button, Input } from '@heroui/react'
+import { Card, CardBody, Button, Input, Spinner } from '@heroui/react'
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
+import { useNewsletterSubscription } from '../../hooks/useNewsletter'
 
 const CTASection = () => {
   const [email, setEmail] = useState('')
-  const [isSubscribed, setIsSubscribed] = useState(false)
+  const newsletterMutation = useNewsletterSubscription()
 
-  const handleNewsletterSubmit = (e) => {
+  const handleNewsletterSubmit = async (e) => {
     e.preventDefault()
-    // TODO: Connect to backend API for newsletter signup
-    console.log('Newsletter signup:', email)
-    setIsSubscribed(true)
-    setEmail('')
-    // Reset after 3 seconds
-    setTimeout(() => setIsSubscribed(false), 3000)
+    
+    try {
+      await newsletterMutation.mutateAsync(email)
+      setEmail('')
+    } catch (error) {
+      console.error('Newsletter subscription failed:', error)
+    }
   }
 
   return (
@@ -31,11 +33,21 @@ const CTASection = () => {
                 and special event invitations.
               </p>
               
-              {isSubscribed ? (
+              {/* Success Message */}
+              {newsletterMutation.isSuccess && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
-                  Thank you for subscribing! Check your email for confirmation.
+                  🎉 Thank you for subscribing! Check your email for confirmation.
                 </div>
-              ) : (
+              )}
+              
+              {/* Error Message */}
+              {newsletterMutation.isError && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
+                  ❌ {newsletterMutation.error?.message || 'Subscription failed. Please try again.'}
+                </div>
+              )}
+
+              {!newsletterMutation.isSuccess && (
                 <form onSubmit={handleNewsletterSubmit} className="space-y-4">
                   <Input
                     type="email"
@@ -45,14 +57,24 @@ const CTASection = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     variant="bordered"
                     isRequired
+                    isDisabled={newsletterMutation.isPending}
                   />
                   <Button 
                     type="submit"
                     color="warning"
                     className="w-full bg-amber-600 text-white hover:bg-amber-700"
                     size="lg"
+                    isLoading={newsletterMutation.isPending}
+                    isDisabled={newsletterMutation.isPending || !email.trim()}
                   >
-                    Subscribe to Newsletter
+                    {newsletterMutation.isPending ? (
+                      <>
+                        <Spinner size="sm" />
+                        Subscribing...
+                      </>
+                    ) : (
+                      'Subscribe to Newsletter'
+                    )}
                   </Button>
                 </form>
               )}
