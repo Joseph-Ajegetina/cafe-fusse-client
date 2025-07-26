@@ -55,9 +55,15 @@ export const reservationService = {
       customer_name: reservationData.customer_name,
       email: reservationData.email,
       phone_number: reservationData.phone_number || reservationData.phone,
-      reservation_datetime: `${reservationData.date}T${convertTo24Hour(reservationData.time)}:00`,
-      num_of_guests: parseInt(reservationData.number_of_guests || reservationData.guests)
+      reservation_datetime: reservationData.reservation_datetime || `${reservationData.date}T${ensureTimeFormat(reservationData.time)}:00`,
+      num_of_guests: parseInt(reservationData.num_of_guests || reservationData.number_of_guests || reservationData.guests)
     }
+    
+    // Debug logging
+    console.log('Reservation API Debug:', {
+      input: reservationData,
+      transformed: backendData
+    })
     const response = await api.post('/reservations', backendData)
     return response.data
   },
@@ -78,8 +84,32 @@ export const reservationService = {
   }
 }
 
+// Helper function to ensure time is in 24-hour format
+function ensureTimeFormat(time) {
+  if (!time) {
+    throw new Error('Time is required for reservation')
+  }
+  
+  // If already in 24-hour format (like "17:00"), return as is
+  if (time.includes(':') && !time.includes(' ')) {
+    return time
+  }
+  
+  // If in 12-hour format (like "5:00 PM"), convert to 24-hour
+  if (time.includes(' ')) {
+    return convertTo24Hour(time)
+  }
+  
+  // Fallback: assume it's already in correct format
+  return time
+}
+
 // Helper function to convert 12-hour to 24-hour format
 function convertTo24Hour(time12h) {
+  if (!time12h || typeof time12h !== 'string') {
+    throw new Error('Invalid time format')
+  }
+  
   const [time, modifier] = time12h.split(' ')
   let [hours, minutes] = time.split(':')
   

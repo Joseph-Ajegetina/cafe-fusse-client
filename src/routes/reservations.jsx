@@ -25,7 +25,17 @@ function Reservations() {
 
   // Fallback time slots when API is unavailable
   const fallbackSlots = ['17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00']
-  const timeSlots = availableSlots || (slotsError ? fallbackSlots : [])
+  const timeSlots = availableSlots || fallbackSlots
+
+  // Debug logging
+  console.log('Time Slots Debug:', {
+    date: formData.date,
+    availableSlots,
+    slotsError,
+    slotsLoading,
+    timeSlots,
+    shouldShowSlots: !!formData.date
+  })
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({
@@ -175,23 +185,42 @@ function Reservations() {
                       <label className="block text-sm font-medium text-gray-700 mb-2">
                         Available Times {slotsLoading && <span className="text-sm text-gray-500">(loading...)</span>}
                       </label>
-                      <div className="grid grid-cols-3 gap-2">
-                        {timeSlots.map((slot) => (
-                          <button
-                            key={slot}
-                            type="button"
-                            onClick={() => handleInputChange('time', slot)}
-                            className={`p-2 text-sm rounded-lg border transition-colors ${
-                              formData.time === slot
-                                ? 'bg-primary text-white border-primary'
-                                : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
-                            }`}
-                            disabled={createReservationMutation.isPending}
-                          >
-                            {slot}
-                          </button>
-                        ))}
+                      
+                      {/* Debug info */}
+                      <div className="text-xs text-gray-500 mb-2">
+                        Debug: {timeSlots.length} slots available
                       </div>
+                      
+                      {timeSlots.length > 0 ? (
+                        <div className="grid grid-cols-3 gap-2">
+                          {timeSlots.map((slot) => (
+                            <button
+                              key={slot}
+                              type="button"
+                              onClick={() => handleInputChange('time', slot)}
+                              className={`p-2 text-sm rounded-lg border transition-colors ${
+                                formData.time === slot
+                                  ? 'bg-primary text-white border-primary'
+                                  : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
+                              }`}
+                              disabled={createReservationMutation.isPending}
+                            >
+                              {slot}
+                            </button>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="text-gray-500 text-sm">
+                          {slotsLoading ? 'Loading available times...' : 'No time slots available for this date'}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  
+                  {/* Debug: Show when no date selected */}
+                  {!formData.date && (
+                    <div className="text-xs text-gray-400">
+                      Select a date to see available time slots
                     </div>
                   )}
                 </div>
