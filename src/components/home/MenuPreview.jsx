@@ -1,124 +1,108 @@
-import { Card, CardBody, Button, Chip, Spinner } from '@heroui/react'
+import { Card, CardBody, Chip, Button } from '@heroui/react'
 import { Link } from '@tanstack/react-router'
 import { useFeaturedItems } from '../../hooks/useMenu'
 
 const MenuPreview = () => {
-  const { data: featuredData, isLoading } = useFeaturedItems()
+  const { data: featuredItems, isLoading, error } = useFeaturedItems()
 
-  // Fallback featured dishes with real images
+  // Fallback data for when API is not available
   const fallbackFeaturedDishes = [
     {
-      id: 1,
-      name: "Grilled Salmon",
-      description: "Fresh Atlantic salmon with lemon butter sauce and seasonal vegetables",
-      price: "22.00",
-      category: "Main Course",
-      image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-      popular: true
-    },
-    {
-      id: 2,
-      name: "Bruschetta",
-      description: "Fresh tomatoes, basil, olive oil, and toasted baguette slices",
-      price: "8.50",
-      category: "Starter",
-      image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-    },
-    {
-      id: 3,
       name: "Ribeye Steak",
-      description: "12 oz prime cut with garlic mashed potatoes",
-      price: "28.00",
-      category: "Main Course", 
+      description: "Premium cut ribeye with truffle butter, roasted vegetables, and red wine reduction.",
+      price: "32.00",
       image: "/src/assets/images/gallery-ribeye-steak.webp",
+      category: "Main Course",
+      popular: true,
+      chefSpecial: false
+    },
+    {
+      name: "Lobster Ravioli",
+      description: "House-made pasta filled with fresh lobster in a creamy tomato basil sauce.",
+      price: "28.00",
+      image: "/src/assets/images/gallery-ribeye-steak.webp",
+      category: "Pasta",
+      popular: false,
       chefSpecial: true
     },
     {
-      id: 4,
-      name: "Tiramisu",
-      description: "Classic Italian dessert with mascarpone",
-      price: "7.50",
+      name: "Duck Confit",
+      description: "Slow-cooked duck leg with garlic mashed potatoes and cherry gastrique.",
+      price: "26.00",
+      image: "/src/assets/images/gallery-ribeye-steak.webp",
+      category: "Main Course",
+      popular: true,
+      chefSpecial: false
+    },
+    {
+      name: "Chocolate Lava Cake",
+      description: "Warm chocolate cake with molten center, vanilla ice cream, and berry coulis.",
+      price: "12.00",
+      image: "/src/assets/images/gallery-ribeye-steak.webp",
       category: "Dessert",
-      image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+      popular: true,
+      chefSpecial: false
     }
   ]
 
-  const featuredDishes = featuredData?.items || fallbackFeaturedDishes
-
-  if (isLoading) {
-    return (
-      <section className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center">
-            <Spinner size="lg" />
-            <p className="mt-4 text-gray-600">Loading featured dishes...</p>
-          </div>
-        </div>
-      </section>
-    )
-  }
+  // Use API data if available, otherwise use fallback
+  const featuredDishes = featuredItems?.length > 0 ? featuredItems : fallbackFeaturedDishes
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Featured Dishes</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover some of our most beloved dishes, crafted with passion and 
-            the finest ingredients.
-          </p>
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Signature Dishes</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {featuredDishes.map((dish, index) => (
-            <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow">
-              <CardBody className="p-0">
-                <div className="relative">
+            <div key={index} className="text-center group">
+              <div className="relative mb-6">
+                <div className="w-48 h-48 mx-auto rounded-full overflow-hidden bg-gray-100 group-hover:scale-105 transition-transform duration-300">
                   <img
                     src={dish.image}
                     alt={dish.name}
-                    className="w-full h-48 object-cover rounded-t-lg"
+                    className="w-full h-full object-cover"
                     loading="lazy"
                   />
-                  <div className="absolute top-3 left-3 flex gap-2">
-                    {dish.popular && (
-                      <Chip size="sm" color="danger" variant="solid">
-                        Popular
-                      </Chip>
-                    )}
-                    {dish.chefSpecial && (
-                      <Chip size="sm" color="warning" variant="solid">
-                        Chef's Special
-                      </Chip>
-                    )}
-                  </div>
                 </div>
-                
-                <div className="p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold text-lg text-gray-800">
-                      {dish.name}
-                    </h3>
-                    <span className="font-bold text-amber-600 text-lg">
-                      ${parseFloat(dish.price).toFixed(2)}
+                {dish.popular && (
+                  <div className="absolute top-2 right-8">
+                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                      Popular
                     </span>
                   </div>
-                  
-                  <Chip 
-                    size="sm" 
-                    variant="flat" 
-                    color="default"
-                    className="mb-3"
-                  >
-                    {dish.category}
-                  </Chip>
-                  
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {dish.description}
-                  </p>
-                </div>
-              </CardBody>
-            </Card>
+                )}
+                {dish.chefSpecial && (
+                  <div className="absolute top-2 right-8">
+                    <span className="bg-primary text-white text-xs px-2 py-1 rounded-full font-medium">
+                      Chef's Special
+                    </span>
+                  </div>
+                )}
+              </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-bold text-xl text-gray-900">
+                  {dish.name}
+                </h3>
+                
+                <p className="text-gray-600 text-sm leading-relaxed px-4">
+                  {dish.description}
+                </p>
+                
+                <Button 
+                  as={Link}
+                  to="/menu"
+                  color="primary"
+                  className="rounded-full px-6 py-2 font-medium"
+                  size="sm"
+                >
+                  Order Now
+                </Button>
+              </div>
+            </div>
           ))}
         </div>
 
@@ -126,11 +110,11 @@ const MenuPreview = () => {
           <Button 
             as={Link}
             to="/menu"
+            variant="bordered"
+            className="border-gray-300 text-gray-700 hover:bg-gray-50 rounded-full px-8"
             size="lg"
-            color="warning"
-            className="bg-amber-600 text-white hover:bg-amber-700 px-8"
           >
-            View Full Menu
+            Explore more
           </Button>
         </div>
       </div>

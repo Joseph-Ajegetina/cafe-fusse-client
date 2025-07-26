@@ -3,55 +3,49 @@ import { Link } from '@tanstack/react-router'
 
 const HeroSection = () => {
   return (
-    <div className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/src/assets/images/home-cafe-fausse.webp')`
-        }}
-      />
-      
-      {/* Content */}
-      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
-        <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight">
-          <span className="text-amber-400">Café</span> Fausse
-        </h1>
-        
-        <p className="text-xl md:text-2xl mb-8 font-light leading-relaxed">
-          Where tradition meets innovation
-        </p>
-        
-        <p className="text-lg mb-12 max-w-2xl mx-auto opacity-90">
-          Experience exceptional Italian cuisine crafted with passion, 
-          served in an atmosphere of elegant sophistication.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            as={Link}
-            to="/reservations"
-            size="lg"
-            className="bg-amber-600 text-white hover:bg-amber-700 px-8 py-6 text-lg font-semibold"
-          >
-            Make Reservation
-          </Button>
+    <div className="bg-white">
+      {/* Clean hero section with side-by-side layout */}
+      <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+          {/* Left Content */}
+          <div className="space-y-8">
+            <div>
+              <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
+                ITALIAN INSPIRED
+                <br />
+                <span className="text-primary">CUISINE</span>
+              </h1>
+            </div>
+            
+            <p className="text-xl text-gray-600 leading-relaxed max-w-md">
+              Fresh, authentic, delicious
+            </p>
+            
+            <div className="pt-4">
+              <Button 
+                as={Link}
+                to="/reservations"
+                size="lg"
+                color="primary"
+                className="px-8 py-6 text-lg font-medium rounded-full"
+              >
+                Book Now
+              </Button>
+            </div>
+          </div>
           
-          <Button 
-            as={Link}
-            to="/menu"
-            variant="bordered"
-            size="lg"
-            className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-6 text-lg font-semibold"
-          >
-            View Menu
-          </Button>
-        </div>
-        
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
+          {/* Right Image */}
+          <div className="relative">
+            <div className="aspect-square rounded-full overflow-hidden bg-gray-100">
+              <img
+                src="/src/assets/images/gallery-ribeye-steak.webp"
+                alt="Signature Italian Dish"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {/* Decorative elements */}
+            <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-full -z-10"></div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary-50 rounded-full -z-10"></div>
           </div>
         </div>
       </div>

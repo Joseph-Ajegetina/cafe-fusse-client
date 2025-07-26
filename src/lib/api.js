@@ -137,6 +137,32 @@ export const menuService = {
   searchMenu: async (searchTerm) => {
     const response = await api.get(`/menu/search?q=${encodeURIComponent(searchTerm)}`)
     return response.data
+  },
+  
+  // Get featured items (fallback to full menu for now)
+  getFeaturedItems: async () => {
+    try {
+      // Try to get featured items if endpoint exists
+      const response = await api.get('/menu/featured')
+      return response.data
+    } catch {
+      // Fallback: get full menu and return first few items as "featured"
+      const menu = await menuService.getMenu()
+      if (menu && menu.categories && menu.categories.length > 0) {
+        const featuredItems = []
+        menu.categories.forEach(category => {
+          if (category.items && category.items.length > 0) {
+            // Take first item from each category as featured
+            featuredItems.push({
+              ...category.items[0],
+              category_name: category.name
+            })
+          }
+        })
+        return { items: featuredItems.slice(0, 3) } // Return first 3 as featured
+      }
+      return { items: [] }
+    }
   }
 }
 

@@ -3,44 +3,44 @@ import { Card, CardBody, Image } from '@heroui/react'
 const FeaturesSection = () => {
   const features = [
     {
+      icon: (
+        <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ),
       title: "Award-Winning Cuisine",
-      description: "Recognized for culinary excellence with multiple awards including Restaurant of the Year 2023.",
-      image: "/src/assets/images/gallery-ribeye-steak.webp",
-      icon: (
-        <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-        </svg>
-      )
+      description: "Our dishes have earned recognition from culinary experts and food critics worldwide.",
+      image: "/src/assets/images/gallery-ribeye-steak.webp"
     },
     {
-      title: "Locally Sourced",
-      description: "Fresh ingredients sourced from local farms and markets, supporting our community and ensuring quality.",
-      image: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
       icon: (
-        <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0A2.704 2.704 0 013 15.546V6.454c.477-.309.973-.484 1.5-.454C5.5 6 6.5 6 7.5 6S9.5 6 10.5 6s2-.001 3 0 2 0 3 0 2 0 3 0 2-.001 3 0c.527-.03 1.023.145 1.5.454v9.092z" />
-        </svg>
-      )
-    },
-    {
-      title: "Elegant Atmosphere",
-      description: "Sophisticated dining environment perfect for romantic dinners, business meetings, and special celebrations.",
-      image: "/src/assets/images/gallery-cafe-interior.webp",
-      icon: (
-        <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
         </svg>
-      )
+      ),
+      title: "Elegant Atmosphere",
+      description: "Dine in style with our sophisticated ambiance perfect for any special occasion.",
+      image: "/src/assets/images/gallery-cafe-interior.webp"
     },
     {
-      title: "Expert Culinary Team",
-      description: "Led by Chef Antonio Rossi with over 20 years of experience in renowned kitchens across Italy and France.",
-      image: "/src/assets/images/gallery-special-event.webp",
       icon: (
-        <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
         </svg>
-      )
+      ),
+      title: "Expert Culinary Team",
+      description: "Our world-class chefs bring decades of experience and passion to every dish.",
+      image: "/src/assets/images/gallery-special-event.webp"
+    },
+    {
+      icon: (
+        <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+      title: "Premium Ingredients",
+      description: "We source only the finest, freshest ingredients from trusted local and international suppliers.",
+      image: "/src/assets/images/gallery-ribeye-steak.webp"
     }
   ]
 
@@ -49,39 +49,33 @@ const FeaturesSection = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Why Choose Café Fausse</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Our commitment to excellence is reflected in every aspect of your dining experience, 
-            from the quality of our ingredients to the warmth of our service.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Experience the perfect combination of exceptional cuisine, elegant atmosphere, 
+            and unparalleled service that makes every visit memorable.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow">
-              <CardBody className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
-                      {feature.icon}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
+              <CardBody className="text-center p-6">
+                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  {feature.icon}
                 </div>
-                <div className="mt-6">
-                  <Image
-                    src={feature.image}
-                    alt={feature.title}
-                    className="w-full h-48 object-cover rounded-lg"
-                    fallbackSrc="https://via.placeholder.com/500x300?text=Café+Fausse"
-                  />
-                </div>
+                
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-full h-32 object-cover rounded-lg mb-4"
+                />
+                
+                <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                  {feature.title}
+                </h3>
+                
+                <p className="text-gray-600 leading-relaxed text-sm">
+                  {feature.description}
+                </p>
               </CardBody>
             </Card>
           ))}

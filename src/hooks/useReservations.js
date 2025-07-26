@@ -36,11 +36,21 @@ export const useCheckAvailability = (date, time, guests, enabled = false) => {
 }
 
 // Hook for getting available time slots
-export const useAvailableSlots = (date, numGuests = 2, enabled = false) => {
+export const useAvailableSlots = (date, numGuests = 2) => {
   return useQuery({
     queryKey: [...reservationKeys.availableSlots(date), numGuests],
     queryFn: () => reservationService.getAvailableSlots(date, numGuests),
-    enabled: enabled && !!date,
+    enabled: !!date, // Enable when date is provided
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: false, // Don't retry on failure, fallback to static slots
+    placeholderData: () => {
+      // Provide fallback time slots when API is unavailable
+      const slots = []
+      for (let hour = 17; hour <= 21; hour++) {
+        slots.push(`${hour}:00`)
+        if (hour < 21) slots.push(`${hour}:30`)
+      }
+      return slots
+    }
   })
 } 

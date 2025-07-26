@@ -24,83 +24,94 @@ const Header = () => {
   ]
 
   return (
-    <Navbar 
-      onMenuOpenChange={setIsMenuOpen}
-      className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50"
-      maxWidth="xl"
-      height="4rem"
-    >
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden text-gray-700 hover:text-amber-600 transition-colors"
-        />
-        <NavbarBrand>
-          <Link to="/" className="focus-ring rounded-lg">
-            <p className="font-bold text-2xl text-amber-600 hover:text-amber-700 transition-colors">
-              Café Fausse
-            </p>
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
+    <div className="w-full">
+      <Navbar 
+        onMenuOpenChange={setIsMenuOpen}
+        className="bg-white border-none sticky top-0 z-50"
+        maxWidth="full"
+        height="5rem"
+      >
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden text-gray-700 hover:text-primary transition-colors"
+          />
+          <NavbarBrand>
+            <Link to="/" className="focus-ring rounded-lg">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-primary rounded-full"></div>
+                <p className="font-bold text-xl text-gray-900">
+                  CAFÉ FAUSSE
+                </p>
+              </div>
+            </Link>
+          </NavbarBrand>
+        </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-8" justify="center">
-        {menuItems.map((item) => (
-          <NavbarItem key={item.path}>
+        <NavbarContent className="hidden sm:flex gap-8" justify="center">
+          {menuItems.map((item) => (
+            <NavbarItem key={item.path}>
+              <Link 
+                to={item.path}
+                className="text-gray-700 hover:text-primary transition-colors duration-200 font-medium px-3 py-2"
+                activeProps={{
+                  className: "text-primary font-semibold"
+                }}
+              >
+                {item.name}
+              </Link>
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+
+        <NavbarContent justify="end" className="gap-3">
+          <NavbarItem className="hidden sm:flex">
             <Link 
-              to={item.path}
-              className="text-gray-700 hover:text-amber-600 transition-colors duration-200 font-medium focus-ring rounded px-2 py-1"
-              activeProps={{
-                className: "text-amber-600 font-semibold"
-              }}
+              to="/menu"
+              className="text-gray-700 hover:text-primary transition-colors font-medium"
             >
-              {item.name}
+              Order Online
             </Link>
           </NavbarItem>
-        ))}
-      </NavbarContent>
+          <NavbarItem>
+            <Button 
+              as={Link} 
+              to="/reservations"
+              className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-full px-6"
+              size="sm"
+            >
+              Book a Table
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
 
-      <NavbarContent justify="end">
-        <NavbarItem>
-          <Button 
-            as={Link} 
-            to="/reservations"
-            color="warning"
-            variant="solid"
-            className="bg-amber-600 text-white hover:bg-amber-700 transition-colors focus-ring"
-            size="sm"
-          >
-            Make Reservation
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
-
-      <NavbarMenu className="bg-white/95 backdrop-blur-md">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item.name}-${index}`} className="py-2">
-            <Link
-              to={item.path}
-              className="w-full text-lg text-gray-700 hover:text-amber-600 transition-colors focus-ring rounded px-2 py-1"
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item.name}-${index}`}>
+              <Link
+                to={item.path}
+                className="w-full text-lg text-gray-700 hover:text-primary transition-colors focus-ring rounded px-2 py-1"
+                size="lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+          <NavbarMenuItem>
+            <Button 
+              as={Link}
+              to="/reservations"
+              color="primary"
+              className="w-full transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              {item.name}
-            </Link>
+              Make Reservation
+            </Button>
           </NavbarMenuItem>
-        ))}
-        <NavbarMenuItem className="py-4">
-          <Button 
-            as={Link} 
-            to="/reservations"
-            color="warning"
-            variant="solid"
-            className="w-full bg-amber-600 text-white hover:bg-amber-700 transition-colors"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Make Reservation
-          </Button>
-        </NavbarMenuItem>
-      </NavbarMenu>
-    </Navbar>
+        </NavbarMenu>
+      </Navbar>
+    </div>
   )
 }
 
