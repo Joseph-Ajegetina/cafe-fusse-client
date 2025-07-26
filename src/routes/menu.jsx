@@ -168,15 +168,6 @@ function Menu() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-16">
-        {/* Success Message */}
-        {menu && !error && (
-          <div className="mb-8">
-            <Chip color="success" variant="flat">
-              ✅ Menu loaded successfully from our kitchen!
-            </Chip>
-          </div>
-        )}
-
         {/* Error Message */}
         {error && (
           <div className="mb-8">
