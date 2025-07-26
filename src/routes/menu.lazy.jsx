@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { Card, CardBody, Button, Chip } from '@heroui/react'
 import { useMenu } from '../hooks/useMenu'
 
@@ -8,7 +8,7 @@ import interiorImage from '../assets/images/gallery-cafe-interior.webp'
 import steakImage from '../assets/images/gallery-ribeye-steak.webp'
 import eventImage from '../assets/images/gallery-special-event.webp'
 
-export const Route = createFileRoute('/menu')({
+export const Route = createLazyFileRoute('/menu')({
   component: Menu,
 })
 

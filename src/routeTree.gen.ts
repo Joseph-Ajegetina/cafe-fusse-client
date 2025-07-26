@@ -8,33 +8,36 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ReservationsRouteImport } from './routes/reservations'
-import { Route as MenuRouteImport } from './routes/menu'
-import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
-const ReservationsRoute = ReservationsRouteImport.update({
+const ReservationsLazyRouteImport = createFileRoute('/reservations')()
+const MenuLazyRouteImport = createFileRoute('/menu')()
+const GalleryLazyRouteImport = createFileRoute('/gallery')()
+const AboutLazyRouteImport = createFileRoute('/about')()
+
+const ReservationsLazyRoute = ReservationsLazyRouteImport.update({
   id: '/reservations',
   path: '/reservations',
   getParentRoute: () => rootRouteImport,
-} as any)
-const MenuRoute = MenuRouteImport.update({
+} as any).lazy(() => import('./routes/reservations.lazy').then((d) => d.Route))
+const MenuLazyRoute = MenuLazyRouteImport.update({
   id: '/menu',
   path: '/menu',
   getParentRoute: () => rootRouteImport,
-} as any)
-const GalleryRoute = GalleryRouteImport.update({
+} as any).lazy(() => import('./routes/menu.lazy').then((d) => d.Route))
+const GalleryLazyRoute = GalleryLazyRouteImport.update({
   id: '/gallery',
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
+} as any).lazy(() => import('./routes/gallery.lazy').then((d) => d.Route))
+const AboutLazyRoute = AboutLazyRouteImport.update({
   id: '/about',
   path: '/about',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,25 +46,25 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/gallery': typeof GalleryRoute
-  '/menu': typeof MenuRoute
-  '/reservations': typeof ReservationsRoute
+  '/about': typeof AboutLazyRoute
+  '/gallery': typeof GalleryLazyRoute
+  '/menu': typeof MenuLazyRoute
+  '/reservations': typeof ReservationsLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/gallery': typeof GalleryRoute
-  '/menu': typeof MenuRoute
-  '/reservations': typeof ReservationsRoute
+  '/about': typeof AboutLazyRoute
+  '/gallery': typeof GalleryLazyRoute
+  '/menu': typeof MenuLazyRoute
+  '/reservations': typeof ReservationsLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/gallery': typeof GalleryRoute
-  '/menu': typeof MenuRoute
-  '/reservations': typeof ReservationsRoute
+  '/about': typeof AboutLazyRoute
+  '/gallery': typeof GalleryLazyRoute
+  '/menu': typeof MenuLazyRoute
+  '/reservations': typeof ReservationsLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -73,10 +76,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  GalleryRoute: typeof GalleryRoute
-  MenuRoute: typeof MenuRoute
-  ReservationsRoute: typeof ReservationsRoute
+  AboutLazyRoute: typeof AboutLazyRoute
+  GalleryLazyRoute: typeof GalleryLazyRoute
+  MenuLazyRoute: typeof MenuLazyRoute
+  ReservationsLazyRoute: typeof ReservationsLazyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,28 +88,28 @@ declare module '@tanstack/react-router' {
       id: '/reservations'
       path: '/reservations'
       fullPath: '/reservations'
-      preLoaderRoute: typeof ReservationsRouteImport
+      preLoaderRoute: typeof ReservationsLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/menu': {
       id: '/menu'
       path: '/menu'
       fullPath: '/menu'
-      preLoaderRoute: typeof MenuRouteImport
+      preLoaderRoute: typeof MenuLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
       fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryRouteImport
+      preLoaderRoute: typeof GalleryLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+      preLoaderRoute: typeof AboutLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -121,10 +124,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  GalleryRoute: GalleryRoute,
-  MenuRoute: MenuRoute,
-  ReservationsRoute: ReservationsRoute,
+  AboutLazyRoute: AboutLazyRoute,
+  GalleryLazyRoute: GalleryLazyRoute,
+  MenuLazyRoute: MenuLazyRoute,
+  ReservationsLazyRoute: ReservationsLazyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

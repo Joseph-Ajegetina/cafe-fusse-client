@@ -10,26 +10,4 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  server: {
-    proxy: {
-      // Proxy API calls to your local backend
-      '/api': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-        ws: true, // Enable WebSocket proxying if needed
-        configure: (proxy) => {
-          proxy.on('error', (err) => {
-            console.log('Proxy error:', err);
-          });
-          proxy.on('proxyReq', (proxyReq, req) => {
-            console.log('Proxying request:', req.method, req.url, '-> target:', proxyReq.getHeader('host') + proxyReq.path);
-          });
-          proxy.on('proxyRes', (proxyRes, req) => {
-            console.log('Received response:', proxyRes.statusCode, req.url);
-          });
-        },
-      },
-    },
-  },
 });

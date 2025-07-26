@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { Card, CardBody, CardHeader, Input, Select, SelectItem, Button, Chip } from '@heroui/react'
 import { useCreateReservation, useAvailableSlots } from '../hooks/useReservations'
 
-export const Route = createFileRoute('/reservations')({
+export const Route = createLazyFileRoute('/reservations')({
   component: Reservations,
 })
 

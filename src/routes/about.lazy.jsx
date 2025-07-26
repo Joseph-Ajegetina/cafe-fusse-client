@@ -1,7 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { Card, CardBody, Chip, Avatar } from '@heroui/react'
 
-export const Route = createFileRoute('/about')({
+export const Route = createLazyFileRoute('/about')({
   component: About,
 })
 
