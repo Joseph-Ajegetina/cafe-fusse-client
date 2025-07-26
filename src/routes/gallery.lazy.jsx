@@ -10,55 +10,55 @@ function Gallery() {
   const galleryImages = [
     {
       id: 1,
-      src: "/src/assets/images/gallery-ribeye-steak.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
       alt: "Premium Ribeye Steak with Truffle Butter",
       category: "Main Courses"
     },
     {
       id: 2,
-      src: "/src/assets/images/gallery-cafe-interior.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-cafe-interior_qgcoka.webp",
       alt: "Elegant Dining Room Interior",
       category: "Restaurant"
     },
     {
       id: 3,
-      src: "/src/assets/images/gallery-special-event.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-special-event_q2r96c.webp",
       alt: "Special Event Celebration",
       category: "Events"
     },
     {
       id: 4,
-      src: "/src/assets/images/home-cafe-fausse.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/home-cafe-fausse_f7mvr1.webp",
       alt: "Restaurant Exterior and Ambiance",
       category: "Restaurant"
     },
     {
       id: 5,
-      src: "/src/assets/images/gallery-ribeye-steak.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
       alt: "Handmade Pasta with Fresh Herbs",
       category: "Pasta"
     },
     {
       id: 6,
-      src: "/src/assets/images/gallery-cafe-interior.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-cafe-interior_qgcoka.webp",
       alt: "Private Dining Room Setup",
       category: "Restaurant"
     },
     {
       id: 7,
-      src: "/src/assets/images/gallery-special-event.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-special-event_q2r96c.webp",
       alt: "Chef's Special Dessert Presentation",
       category: "Desserts"
     },
     {
       id: 8,
-      src: "/src/assets/images/home-cafe-fausse.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/home-cafe-fausse_f7mvr1.webp",
       alt: "Wine Selection and Bar Area",
       category: "Bar"
     },
     {
       id: 9,
-      src: "/src/assets/images/gallery-ribeye-steak.webp",
+      src: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
       alt: "Fresh Seafood Display",
       category: "Seafood"
     }

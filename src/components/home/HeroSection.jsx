@@ -38,7 +38,7 @@ const HeroSection = () => {
           <div className="relative">
             <div className="aspect-square rounded-full overflow-hidden bg-gray-100">
               <img
-                src="/src/assets/images/gallery-ribeye-steak.webp"
+                src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp"
                 alt="Signature Italian Dish"
                 className="w-full h-full object-cover"
               />

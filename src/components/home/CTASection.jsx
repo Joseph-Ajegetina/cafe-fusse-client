@@ -99,15 +99,15 @@ const CTASection = () => {
           
           {/* Right: Instagram Grid */}
           <div className="grid grid-cols-3 gap-2">
-            <img src="/src/assets/images/gallery-ribeye-steak.webp" alt="Food 1" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/gallery-cafe-interior.webp" alt="Food 2" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/gallery-special-event.webp" alt="Food 3" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/home-cafe-fausse.webp" alt="Food 4" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/gallery-ribeye-steak.webp" alt="Food 5" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/gallery-cafe-interior.webp" alt="Food 6" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/gallery-special-event.webp" alt="Food 7" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/home-cafe-fausse.webp" alt="Food 8" className="aspect-square object-cover rounded-lg" />
-            <img src="/src/assets/images/gallery-ribeye-steak.webp" alt="Food 9" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp" alt="Food 1" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-cafe-interior_qgcoka.webp" alt="Food 2" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-special-event_q2r96c.webp" alt="Food 3" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/home-cafe-fausse_f7mvr1.webp" alt="Food 4" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp" alt="Food 5" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-cafe-interior_qgcoka.webp" alt="Food 6" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-special-event_q2r96c.webp" alt="Food 7" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/home-cafe-fausse_f7mvr1.webp" alt="Food 8" className="aspect-square object-cover rounded-lg" />
+            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp" alt="Food 9" className="aspect-square object-cover rounded-lg" />
           </div>
         </div>
       </div>

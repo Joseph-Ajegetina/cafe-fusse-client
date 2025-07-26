@@ -11,7 +11,7 @@ const MenuPreview = () => {
       name: "Ribeye Steak",
       description: "Premium cut ribeye with truffle butter, roasted vegetables, and red wine reduction.",
       price: "32.00",
-      image: "/src/assets/images/gallery-ribeye-steak.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
       category: "Main Course",
       popular: true,
       chefSpecial: false
@@ -20,7 +20,7 @@ const MenuPreview = () => {
       name: "Lobster Ravioli",
       description: "House-made pasta filled with fresh lobster in a creamy tomato basil sauce.",
       price: "28.00",
-      image: "/src/assets/images/gallery-ribeye-steak.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
       category: "Pasta",
       popular: false,
       chefSpecial: true
@@ -29,7 +29,7 @@ const MenuPreview = () => {
       name: "Duck Confit",
       description: "Slow-cooked duck leg with garlic mashed potatoes and cherry gastrique.",
       price: "26.00",
-      image: "/src/assets/images/gallery-ribeye-steak.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
       category: "Main Course",
       popular: true,
       chefSpecial: false
@@ -38,7 +38,7 @@ const MenuPreview = () => {
       name: "Chocolate Lava Cake",
       description: "Warm chocolate cake with molten center, vanilla ice cream, and berry coulis.",
       price: "12.00",
-      image: "/src/assets/images/gallery-ribeye-steak.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
       category: "Dessert",
       popular: true,
       chefSpecial: false

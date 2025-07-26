@@ -29,7 +29,7 @@ const ContactSection = () => {
               <div className="space-y-4">
                 <div className="aspect-square rounded-full overflow-hidden bg-gray-100">
                   <img
-                    src="/src/assets/images/gallery-ribeye-steak.webp"
+                    src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp"
                     alt="Signature dish"
                     className="w-full h-full object-cover"
                   />
@@ -38,7 +38,7 @@ const ContactSection = () => {
               <div className="space-y-4 pt-8">
                 <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100">
                   <img
-                    src="/src/assets/images/gallery-cafe-interior.webp"
+                    src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-cafe-interior_qgcoka.webp"
                     alt="Restaurant interior"
                     className="w-full h-full object-cover"
                   />

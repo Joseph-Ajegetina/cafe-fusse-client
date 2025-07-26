@@ -10,7 +10,7 @@ const FeaturesSection = () => {
       ),
       title: "Award-Winning Cuisine",
       description: "Our dishes have earned recognition from culinary experts and food critics worldwide.",
-      image: "/src/assets/images/gallery-ribeye-steak.webp"
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp"
     },
     {
       icon: (
@@ -20,7 +20,7 @@ const FeaturesSection = () => {
       ),
       title: "Elegant Atmosphere",
       description: "Dine in style with our sophisticated ambiance perfect for any special occasion.",
-      image: "/src/assets/images/gallery-cafe-interior.webp"
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-cafe-interior_qgcoka.webp"
     },
     {
       icon: (
@@ -30,7 +30,7 @@ const FeaturesSection = () => {
       ),
       title: "Expert Culinary Team",
       description: "Our world-class chefs bring decades of experience and passion to every dish.",
-      image: "/src/assets/images/gallery-special-event.webp"
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-special-event_q2r96c.webp"
     },
     {
       icon: (
@@ -40,7 +40,7 @@ const FeaturesSection = () => {
       ),
       title: "Premium Ingredients",
       description: "We source only the finest, freshest ingredients from trusted local and international suppliers.",
-      image: "/src/assets/images/gallery-ribeye-steak.webp"
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp"
     }
   ]
 
