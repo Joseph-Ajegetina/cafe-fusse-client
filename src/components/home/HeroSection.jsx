@@ -3,49 +3,46 @@ import { Link } from '@tanstack/react-router'
 
 const HeroSection = () => {
   return (
-    <div className="bg-white">
-      {/* Clean hero section with side-by-side layout */}
-      <div className="max-w-7xl mx-auto px-4 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <div>
-              <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                ITALIAN INSPIRED
-                <br />
-                <span className="text-primary">CUISINE</span>
-              </h1>
+    <div className="relative h-[810px]">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp')`
+        }}
+      >
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+      
+      {/* Content Card */}
+      <div className="relative max-w-7xl mx-auto px-4 py-20 flex items-center h-[810px]">
+        <div className="max-w-2xl">
+          <div className="bg-white/95 backdrop-blur-sm shadow-2xl p-12 lg:p-16">
+            <div className="space-y-8">
+              <div>
+                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                  ASIAN INSPIRED
+                  <br />
+                  <span className="text-orange-500">BOWLS</span>
+                </h1>
+              </div>
+              
+              <p className="text-xl text-gray-600 leading-relaxed">
+                Fresh, healthy, delicious
+              </p>
+              
+              <div className="pt-4">
+                <Button 
+                  as={Link}
+                  to="/menu"
+                  size="lg"
+                  className="px-8 py-6 text-lg font-medium rounded-full bg-orange-500 hover:bg-orange-600 text-white"
+                >
+                  Order Now
+                </Button>
+              </div>
             </div>
-            
-            <p className="text-xl text-gray-600 leading-relaxed max-w-md">
-              Fresh, authentic, delicious
-            </p>
-            
-            <div className="pt-4">
-              <Button 
-                as={Link}
-                to="/reservations"
-                size="lg"
-                color="primary"
-                className="px-8 py-6 text-lg font-medium rounded-full"
-              >
-                Book Now
-              </Button>
-            </div>
-          </div>
-          
-          {/* Right Image */}
-          <div className="relative">
-            <div className="aspect-square rounded-full overflow-hidden bg-gray-100">
-              <img
-                src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp"
-                alt="Signature Italian Dish"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Decorative elements */}
-            <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-full -z-10"></div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary-50 rounded-full -z-10"></div>
           </div>
         </div>
       </div>
