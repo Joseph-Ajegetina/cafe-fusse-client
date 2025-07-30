@@ -39,7 +39,7 @@ const Header = () => {
           <NavbarBrand>
             <Link to="/" className="focus-ring rounded-lg">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-full"></div>
+                <img src="/src/assets/logo.png" alt="logo" className="w-10 h-10" />
                 <p className="font-bold text-xl text-gray-900">
                   CAFÉ FAUSSE
                 </p>
