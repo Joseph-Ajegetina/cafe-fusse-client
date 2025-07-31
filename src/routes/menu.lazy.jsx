@@ -40,18 +40,8 @@ function Menu() {
   }
 
   const menuData = transformApiData(menu)
-  console.log(menuData)
 
-  const getDietaryColor = (info) => {
-    switch(info) {
-      case 'vegetarian': return 'success'
-      case 'vegan': return 'success'
-      case 'gluten-free': return 'warning'
-      case 'spicy': return 'danger'
-      case 'customizable': return 'primary'
-      default: return 'default'
-    }
-  }
+
 
 
 
@@ -72,14 +62,17 @@ function Menu() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
+      {/* Header Image */}
+      <div className="relative h-80 bg-cover bg-center" style={{
+        backgroundImage: `url('https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp')`
+      }}>
+        <div className="absolute inset-0 bg-black/40"></div>
+      </div>
+
+      {/* Menu Header */}
       <div className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h1 className="text-5xl font-bold text-gray-800 mb-6">Our Menu</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover our carefully crafted selection of authentic dishes, 
-            prepared with the finest ingredients and traditional techniques.
-          </p>
+          <h1 className="text-5xl font-bold text-gray-800 mb-6">Our menu</h1>
         </div>
       </div>
 
@@ -118,81 +111,55 @@ function Menu() {
             </div>
 
             {/* Items Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {category.items?.length > 0 ? (
                 category.items.map((item) => (
-                  <Card key={item.id} className="border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                    <CardBody className="p-6">
-                      {/* Item Image */}
-                      <div className="mb-4 flex justify-center">
-                        <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                          <img
-                            src={item.image_url || item.image || homeImage}
-                            alt={item.item_name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              // Prevent infinite loop by only setting fallback once
-                              if (e.target.src !== homeImage) {
-                                e.target.src = homeImage
-                              } else {
-                                // If even the fallback fails, hide the image and show a placeholder
-                                e.target.style.display = 'none'
-                                e.target.parentElement.innerHTML = `
-                                  <div class="w-full h-full bg-primary/10 flex items-center justify-center">
-                                    <span class="text-primary text-2xl">🍽️</span>
-                                  </div>
-                                `
-                              }
-                            }}
-                          />
-                        </div>
+                  <div key={item.id} className="text-center p-6 border border-gray-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
+                    {/* Item Image */}
+                    <div className="mb-4 flex justify-center">
+                      <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                        <img
+                          src={item.image_url || item.image || homeImage}
+                          alt={item.item_name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            // Prevent infinite loop by only setting fallback once
+                            if (e.target.src !== homeImage) {
+                              e.target.src = homeImage
+                            } else {
+                              // If even the fallback fails, hide the image and show a placeholder
+                              e.target.style.display = 'none'
+                              e.target.parentElement.innerHTML = `
+                                <div class="w-full h-full bg-gray-100 flex items-center justify-center">
+                                  <span class="text-gray-400 text-4xl">🍽️</span>
+                                </div>
+                              `
+                            }
+                          }}
+                        />
                       </div>
+                    </div>
 
-                      {/* Item Info */}
-                      <div className="text-center mb-4">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                          {item.item_name}
-                        </h3>
-                        
-                        <p className="text-sm text-gray-600 leading-relaxed mb-3 line-clamp-3">
-                          {item.description}
-                        </p>
+                    {/* Item Info */}
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-bold text-gray-900">
+                        {item.item_name}
+                      </h3>
+                      
+                      <p className="text-sm text-gray-600 leading-relaxed min-h-[60px]">
+                        {item.description}
+                      </p>
 
-                        {/* Price */}
-                        <div className="text-xl font-bold text-gray-900 mb-3">
-                          ${parseFloat(item.price).toFixed(0)}
-                        </div>
-
-                        {/* Dietary Info */}
-                        {item.dietary_info && item.dietary_info.length > 0 && (
-                          <div className="flex flex-wrap justify-center gap-1 mb-4">
-                            {item.dietary_info.map((info, index) => (
-                              <Chip 
-                                key={index}
-                                size="sm"
-                                color={getDietaryColor(info)}
-                                variant="flat"
-                                className="text-xs"
-                              >
-                                {info.charAt(0).toUpperCase() + info.slice(1).replace('-', ' ')}
-                              </Chip>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Add to Cart Button */}
-                        <Button
-                          color="primary"
-                          variant="flat"
-                          size="sm"
-                          className="w-full"
-                          onPress={() => handleAddToCart(item)}
-                        >
-                          Add to cart
-                        </Button>
-                      </div>
-                    </CardBody>
-                  </Card>
+                      {/* Order Button */}
+                      <Button
+                        className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6 py-2"
+                        size="sm"
+                        onPress={() => handleAddToCart(item)}
+                      >
+                        Order Now
+                      </Button>
+                    </div>
+                  </div>
                 ))
               ) : (
                 <div className="col-span-full text-center py-12">
