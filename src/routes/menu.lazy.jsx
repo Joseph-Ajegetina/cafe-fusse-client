@@ -1,12 +1,9 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { Card, CardBody, Button, Chip } from '@heroui/react'
+import { Card, CardBody, Button } from '@heroui/react'
 import { useMenu } from '../hooks/useMenu'
 
-// Import available images
+// Import default image for fallback
 import homeImage from '../assets/images/home-cafe-fausse.webp'
-import interiorImage from '../assets/images/gallery-cafe-interior.webp'
-import steakImage from '../assets/images/gallery-ribeye-steak.webp'
-import eventImage from '../assets/images/gallery-special-event.webp'
 
 export const Route = createLazyFileRoute('/menu')({
   component: Menu,
@@ -14,54 +11,6 @@ export const Route = createLazyFileRoute('/menu')({
 
 function Menu() {
   const { data: menu, isLoading, error } = useMenu()
-
-  // Fallback data when API is not available
-  const fallbackMenu = {
-    categories: [
-      {
-        id: 1,
-        name: "Main Dishes",
-        description: "Our signature bowls and dishes",
-        items: [
-          {
-            id: 1,
-            item_name: "Build Your Own Bowl",
-            description: "Extra proteins for an additional charge.",
-            price: "20.00",
-            dietary_info: ["customizable"]
-          },
-          {
-            id: 2,
-            item_name: "Rainbow Bowl",
-            description: "Crab + Salmon + Avocado + Cucumber + Pineapple + Carrot + Sesame Seeds + House Sauce",
-            price: "18.00",
-            dietary_info: ["gluten-free"]
-          }
-        ]
-      },
-      {
-        id: 2,
-        name: "Beverages",
-        description: "Fresh drinks and beverages",
-        items: [
-          {
-            id: 7,
-            item_name: "Fresh Lemonade",
-            description: "Made with fresh lemons and natural sweeteners",
-            price: "4.00",
-            dietary_info: ["vegan"]
-          },
-          {
-            id: 8,
-            item_name: "Sparkling Water",
-            description: "Premium sparkling water with natural minerals",
-            price: "3.00",
-            dietary_info: ["vegan"]
-          }
-        ]
-      }
-    ]
-  }
 
   // Transform API data to match expected structure
   const transformApiData = (apiData) => {
@@ -90,8 +39,8 @@ function Menu() {
     }
   }
 
-  // Use API data if available, otherwise use fallback
-  const menuData = menu ? transformApiData(menu) : fallbackMenu
+  const menuData = transformApiData(menu)
+  console.log(menuData)
 
   const getDietaryColor = (info) => {
     switch(info) {
@@ -104,30 +53,7 @@ function Menu() {
     }
   }
 
-  const getDefaultImage = (categoryName, itemName) => {
-    // Use available images based on category and item
-    const categoryLower = categoryName?.toLowerCase() || ''
-    const itemLower = itemName?.toLowerCase() || ''
-    
-    // Match by item name first
-    if (itemLower.includes('steak') || itemLower.includes('beef') || itemLower.includes('meat')) {
-      return steakImage
-    }
-    
-    // Match by category
-    if (categoryLower.includes('starter') || categoryLower.includes('appetizer')) {
-      return homeImage
-    } else if (categoryLower.includes('main') || categoryLower.includes('bowl') || categoryLower.includes('entree')) {
-      return steakImage
-    } else if (categoryLower.includes('dessert') || categoryLower.includes('sweet')) {
-      return eventImage
-    } else if (categoryLower.includes('drink') || categoryLower.includes('beverage')) {
-      return interiorImage
-    }
-    
-    // Default fallback
-    return homeImage
-  }
+
 
   const handleAddToCart = (item) => { // eslint-disable-line no-unused-vars
     // TODO: Implement cart functionality
@@ -158,17 +84,28 @@ function Menu() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-16">
-        {/* Error Message */}
+        {/* Error State */}
         {error && (
-          <div className="mb-8">
-            <Chip color="danger" variant="flat">
-              ❌ Unable to load menu from server. Showing sample menu below.
-            </Chip>
+          <div className="text-center py-16">
+            <Card className="max-w-md mx-auto">
+              <CardBody className="p-8">
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">Unable to Load Menu</h3>
+                <p className="text-gray-600 mb-4">
+                  We're having trouble loading our menu. Please try refreshing the page or contact us directly.
+                </p>
+                <Button 
+                  color="primary" 
+                  onClick={() => window.location.reload()}
+                >
+                  Try Again
+                </Button>
+              </CardBody>
+            </Card>
           </div>
         )}
 
         {/* Categories */}
-        {menuData?.categories?.map((category) => (
+        {!error && menuData?.categories?.map((category) => (
           <section key={category.id} className="mb-16">
             {/* Category Header */}
             <div className="mb-8">
@@ -190,7 +127,7 @@ function Menu() {
                       <div className="mb-4 flex justify-center">
                         <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
                           <img
-                            src={item.image || getDefaultImage(category.name, item.item_name)}
+                            src={item.image_url || item.image || homeImage}
                             alt={item.item_name}
                             className="w-full h-full object-cover"
                             onError={(e) => {
@@ -270,13 +207,13 @@ function Menu() {
         ))}
 
         {/* No categories message */}
-        {(!menuData?.categories || menuData.categories.length === 0) && (
+        {!error && (!menuData?.categories || menuData.categories.length === 0) && (
           <div className="text-center py-16">
             <Card className="max-w-md mx-auto">
               <CardBody className="p-8">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Menu Temporarily Unavailable</h3>
+                <h3 className="text-xl font-semibold text-gray-800 mb-4">Menu Not Available</h3>
                 <p className="text-gray-600">
-                  We're updating our menu. Please check back soon or contact us directly for current offerings.
+                  Our menu is currently being updated. Please check back soon or contact us directly for current offerings.
                 </p>
               </CardBody>
             </Card>
