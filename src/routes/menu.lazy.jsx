@@ -1,5 +1,5 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { Card, CardBody, Button } from '@heroui/react'
+import { Card, CardBody, Button, Image } from '@heroui/react'
 import { useMenu } from '../hooks/useMenu'
 import { useCart } from '../hooks/useCart.jsx'
 
@@ -127,24 +127,13 @@ function Menu() {
                     {/* Item Image */}
                     <div className="mb-4 flex justify-center">
                       <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                        <img
-                          src={item.image_url || item.image || homeImage}
-                          alt={item.item_name}
+                        <Image
+                          src={item.image_url || item.image}
+                          alt={item.item_name || 'Menu item'}
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            // Prevent infinite loop by only setting fallback once
-                            if (e.target.src !== homeImage) {
-                              e.target.src = homeImage
-                            } else {
-                              // If even the fallback fails, hide the image and show a placeholder
-                              e.target.style.display = 'none'
-                              e.target.parentElement.innerHTML = `
-                                <div class="w-full h-full bg-gray-100 flex items-center justify-center">
-                                  <span class="text-gray-400 text-4xl">🍽️</span>
-                                </div>
-                              `
-                            }
-                          }}
+                          fallbackSrc={homeImage}
+                          radius="full"
+                          loading="lazy"
                         />
                       </div>
                     </div>

@@ -1,4 +1,4 @@
-import { Card, CardBody, Avatar } from '@heroui/react'
+import { Card, CardBody, Avatar, Image } from '@heroui/react'
 
 const TestimonialsSection = () => {
   const testimonials = [
@@ -71,10 +71,13 @@ const TestimonialsSection = () => {
           {/* Right: Food Image */}
           <div className="relative">
             <div className="aspect-square rounded-3xl overflow-hidden bg-gray-100">
-              <img
+              <Image
                 src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-special-event_q2r96c.webp"
                 alt="Customer enjoying our food"
                 className="w-full h-full object-cover"
+                fallbackSrc="https://via.placeholder.com/400x400/f3f4f6/6b7280?text=Gallery"
+                radius="xl"
+                loading="lazy"
               />
             </div>
             {/* Decorative background */}

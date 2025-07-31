@@ -9,6 +9,7 @@ import {
   Button,
   Link as HeroLink,
   Badge,
+  Image,
 } from "@heroui/react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
@@ -36,10 +37,12 @@ const Header = () => {
         <NavbarBrand>
           <Link to="/" className="focus-ring rounded-lg">
             <div className="flex items-center space-x-2">
-              <img
+              <Image
                 src="https://res.cloudinary.com/duym3iexv/image/upload/v1753926638/cafe-fusse/logo_labmbf.png"
-                alt="logo"
+                alt="Café Fausse Logo"
                 className="w-10 h-10"
+                fallbackSrc="https://via.placeholder.com/40x40/f97316/ffffff?text=CF"
+                radius="sm"
               />
               <p className="font-bold text-xl text-gray-900">CAFÉ FAUSSE</p>
             </div>

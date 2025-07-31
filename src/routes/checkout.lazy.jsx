@@ -1,5 +1,5 @@
 import { createLazyFileRoute, Link } from "@tanstack/react-router";
-import { Card, CardBody, Button, Input } from "@heroui/react";
+import { Card, CardBody, Button, Input, Image } from "@heroui/react";
 import { useCart } from "../hooks/useCart.jsx";
 import { useMenu } from "../hooks/useMenu";
 import { useState } from "react";
@@ -148,10 +148,13 @@ function Checkout() {
                   className="flex items-center space-x-4 bg-white p-4 rounded-xl"
                 >
                   <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100">
-                    <img
-                      src={item.image_url || item.image || homeImage}
-                      alt={item.item_name}
+                    <Image
+                      src={item.image_url || item.image}
+                      alt={item.item_name || 'Cart item'}
                       className="w-full h-full object-cover"
+                      fallbackSrc={homeImage}
+                      radius="full"
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex-1">
@@ -296,10 +299,13 @@ function Checkout() {
               {displayRecommendedItems.map((item) => (
                 <div key={item.id} className="text-center">
                   <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-100 mx-auto mb-4">
-                    <img
-                      src={item.image_url || item.image || homeImage}
-                      alt={item.item_name}
+                    <Image
+                      src={item.image_url || item.image}
+                      alt={item.item_name || 'Recommended item'}
                       className="w-full h-full object-cover"
+                      fallbackSrc={homeImage}
+                      radius="full"
+                      loading="lazy"
                     />
                   </div>
                   <h4 className="font-bold text-gray-900 mb-2">

@@ -1,9 +1,9 @@
-import { Card, CardBody, Chip, Button } from '@heroui/react'
+import { Card, CardBody, Chip, Button, Image } from '@heroui/react'
 import { Link } from '@tanstack/react-router'
 import { useFeaturedItems } from '../../hooks/useMenu'
 
 const MenuPreview = () => {
-  const { data: featuredItems, isLoading, error } = useFeaturedItems()
+  const { data: featuredItems } = useFeaturedItems()
 
   // Fallback data for when API is not available
   const fallbackFeaturedDishes = [
@@ -60,10 +60,12 @@ const MenuPreview = () => {
             <div key={index} className="text-center group">
               <div className="relative mb-6">
                 <div className="w-48 h-48 mx-auto rounded-full overflow-hidden bg-gray-100 group-hover:scale-105 transition-transform duration-300">
-                  <img
+                  <Image
                     src={dish.image}
-                    alt={dish.name}
+                    alt={dish.name || 'Featured dish'}
                     className="w-full h-full object-cover"
+                    fallbackSrc="https://via.placeholder.com/192x192/f3f4f6/6b7280?text=Dish"
+                    radius="full"
                     loading="lazy"
                   />
                 </div>

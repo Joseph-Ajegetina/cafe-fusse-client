@@ -1,4 +1,4 @@
-import { Card, CardBody, Button, Input, Spinner } from '@heroui/react'
+import { Card, CardBody, Button, Input, Spinner, Image } from '@heroui/react'
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useNewsletterSubscription } from '../../hooks/useNewsletter'
@@ -99,15 +99,15 @@ const CTASection = () => {
           
           {/* Right: Instagram Grid */}
           <div className="grid grid-cols-3 gap-2">
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp" alt="Food 1" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921362/cafe-fusse/desserts/fine-dinning-cafe-dessert-6_kqqudl.png" alt="Food 2" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921358/cafe-fusse/desserts/fine-dinning-cafe-dessert-1_dbcj8v.png" alt="Food 3" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921357/cafe-fusse/desserts/fine-dinning-cafe-dessert-2_j7sdne.png" alt="Food 4" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753922285/cafe-fusse/main/fine-dinning-cafe-main-course-1_agppl5.png" alt="Food 5" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753922288/cafe-fusse/main/fine-dinning-cafe-main-course--6_tx1o56.png" alt="Food 6" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753922287/cafe-fusse/main/fine-dinning-cafe-main-course--2_raog8k.png" alt="Food 7" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921569/cafe-fusse/starters/fine-dinning-cafe-starter-6_y2x8gh.png" alt="Food 8" className="aspect-square object-cover rounded-lg" />
-            <img src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921568/cafe-fusse/starters/fine-dinning-cafe-starter-2_alrcxc.png" alt="Food 9" className="aspect-square object-cover rounded-lg" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp" alt="Ribeye Steak" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Food" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921362/cafe-fusse/desserts/fine-dinning-cafe-dessert-6_kqqudl.png" alt="Dessert Special" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Dessert" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921358/cafe-fusse/desserts/fine-dinning-cafe-dessert-1_dbcj8v.png" alt="Fine Dessert" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Dessert" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921357/cafe-fusse/desserts/fine-dinning-cafe-dessert-2_j7sdne.png" alt="Sweet Delight" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Sweet" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753922285/cafe-fusse/main/fine-dinning-cafe-main-course-1_agppl5.png" alt="Main Course" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Main" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753922288/cafe-fusse/main/fine-dinning-cafe-main-course--6_tx1o56.png" alt="Signature Dish" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Signature" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753922287/cafe-fusse/main/fine-dinning-cafe-main-course--2_raog8k.png" alt="Chef Special" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Special" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921569/cafe-fusse/starters/fine-dinning-cafe-starter-6_y2x8gh.png" alt="Appetizer" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Starter" loading="lazy" />
+            <Image src="https://res.cloudinary.com/duym3iexv/image/upload/v1753921568/cafe-fusse/starters/fine-dinning-cafe-starter-2_alrcxc.png" alt="Fresh Starter" className="aspect-square object-cover" radius="lg" fallbackSrc="https://via.placeholder.com/150x150/f3f4f6/6b7280?text=Fresh" loading="lazy" />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Button, Link as HeroLink } from '@heroui/react'
+import { Button, Link as HeroLink, Image } from '@heroui/react'
 import { Link } from '@tanstack/react-router'
 
 const Footer = () => {
@@ -9,10 +9,12 @@ const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-            <img
+            <Image
                 src="https://res.cloudinary.com/duym3iexv/image/upload/v1753926638/cafe-fusse/logo_labmbf.png"
-                alt="logo"
+                alt="Café Fausse Logo"
                 className="w-10 h-10"
+                fallbackSrc="https://via.placeholder.com/40x40/f97316/ffffff?text=CF"
+                radius="sm"
               />
               <h3 className="text-xl font-bold">CAFÉ FAUSSE</h3>
             </div>
