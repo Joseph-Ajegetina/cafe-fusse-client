@@ -59,7 +59,7 @@ const TestimonialsSection = () => {
                     />
                   ))}
                 </div>
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
                   <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -70,15 +70,15 @@ const TestimonialsSection = () => {
           
           {/* Right: Food Image */}
           <div className="relative">
-            <div className="aspect-square rounded-full overflow-hidden bg-gray-100">
+            <div className="aspect-square rounded-3xl overflow-hidden bg-gray-100">
               <img
-                src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp"
+                src="https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-special-event_q2r96c.webp"
                 alt="Customer enjoying our food"
                 className="w-full h-full object-cover"
               />
             </div>
             {/* Decorative background */}
-            <div className="absolute inset-0 bg-gray-100 rounded-full -z-10 transform translate-x-4 translate-y-4"></div>
+            {/* <div className="absolute inset-0 bg-gray-100 rounded-full -z-10 transform translate-x-4 translate-y-4"></div> */}
           </div>
         </div>
       </div>

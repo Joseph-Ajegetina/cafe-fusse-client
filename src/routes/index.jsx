@@ -14,10 +14,10 @@ function Index() {
   return (
     <div>
       <HeroSection />
-      <ContactSection />
       <FeaturesSection />
       <MenuPreview />
       <TestimonialsSection />
+      <ContactSection />
       <CTASection />
     </div>
   )

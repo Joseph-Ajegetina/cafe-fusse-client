@@ -11,7 +11,7 @@ const MenuPreview = () => {
       name: "Ribeye Steak",
       description: "Premium cut ribeye with truffle butter, roasted vegetables, and red wine reduction.",
       price: "32.00",
-      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753922657/cafe-fusse/signatures/Ribeye%20Steak.png",
       category: "Main Course",
       popular: true,
       chefSpecial: false
@@ -20,7 +20,7 @@ const MenuPreview = () => {
       name: "Lobster Ravioli",
       description: "House-made pasta filled with fresh lobster in a creamy tomato basil sauce.",
       price: "28.00",
-      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753922674/cafe-fusse/signatures/Lobster%20Ravioli.png",
       category: "Pasta",
       popular: false,
       chefSpecial: true
@@ -29,7 +29,7 @@ const MenuPreview = () => {
       name: "Duck Confit",
       description: "Slow-cooked duck leg with garlic mashed potatoes and cherry gastrique.",
       price: "26.00",
-      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753922824/cafe-fusse/signatures/Duck%20confit.png",
       category: "Main Course",
       popular: true,
       chefSpecial: false
@@ -38,7 +38,7 @@ const MenuPreview = () => {
       name: "Chocolate Lava Cake",
       description: "Warm chocolate cake with molten center, vanilla ice cream, and berry coulis.",
       price: "12.00",
-      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753534172/cafe-fusse/gallery-ribeye-steak_zzoddf.webp",
+      image: "https://res.cloudinary.com/duym3iexv/image/upload/v1753922945/cafe-fusse/signatures/lava%20cake.png",
       category: "Dessert",
       popular: true,
       chefSpecial: false
@@ -49,7 +49,7 @@ const MenuPreview = () => {
   const featuredDishes = featuredItems?.length > 0 ? featuredItems : fallbackFeaturedDishes
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Signature Dishes</h2>
