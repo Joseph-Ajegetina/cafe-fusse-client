@@ -1,53 +1,125 @@
-import { createLazyFileRoute, Link } from '@tanstack/react-router'
-import { Card, CardBody, Button, Input } from '@heroui/react'
-import { useCart } from '../hooks/useCart.jsx'
-import { useMenu } from '../hooks/useMenu'
-import { useState } from 'react'
+import { createLazyFileRoute, Link } from "@tanstack/react-router";
+import { Card, CardBody, Button, Input } from "@heroui/react";
+import { useCart } from "../hooks/useCart.jsx";
+import { useMenu } from "../hooks/useMenu";
+import { useState } from "react";
 
 // Import default image for fallback
-import homeImage from '../assets/images/home-cafe-fausse.webp'
+import homeImage from "../assets/images/home-cafe-fausse.webp";
 
-export const Route = createLazyFileRoute('/checkout')({
+export const Route = createLazyFileRoute("/checkout")({
   component: Checkout,
-})
+});
 
 function Checkout() {
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal, addToCart } = useCart()
-  const { data: menu } = useMenu()
-  const [voucher, setVoucher] = useState('')
-  const [appliedVoucher, setAppliedVoucher] = useState('')
-  const [shippingFee] = useState(0)
-  const [serviceFee] = useState(0)
+  const { cartItems, removeFromCart, updateQuantity, getCartTotal, addToCart } =
+    useCart();
+  const { data: menu } = useMenu();
+  const [voucher, setVoucher] = useState("");
+  const [appliedVoucher, setAppliedVoucher] = useState("");
+  const [shippingFee] = useState(0);
+  const [serviceFee] = useState(0);
 
-  const subtotal = getCartTotal()
-  const total = subtotal + shippingFee + serviceFee
+  const subtotal = getCartTotal();
+  const total = subtotal + shippingFee + serviceFee;
 
   const handleApplyVoucher = () => {
-    if (voucher.toLowerCase() === 'freeship') {
-      setAppliedVoucher('freeship')
+    if (voucher.toLowerCase() === "freeship") {
+      setAppliedVoucher("freeship");
       // Could implement shipping fee discount here
     }
-    setVoucher('')
-  }
+    setVoucher("");
+  };
 
   // Get recommended items from menu (first 4 items from first category)
   const getRecommendedItems = () => {
-    if (!menu || !menu.length) return []
-    const firstCategory = menu[0]
-    return firstCategory.items ? firstCategory.items.slice(0, 4) : []
-  }
+    if (!menu) return [];
 
-  const recommendedItems = getRecommendedItems()
+    // Handle different API response structures
+    let categoriesArray = null;
+
+    if (Array.isArray(menu)) {
+      // Direct array response
+      categoriesArray = menu;
+    } else if (menu.menu && Array.isArray(menu.menu)) {
+      // Object with menu property containing array
+      categoriesArray = menu.menu;
+    } else if (menu.categories && Array.isArray(menu.categories)) {
+      // Already transformed data
+      categoriesArray = menu.categories;
+    } else {
+      return [];
+    }
+
+    if (categoriesArray.length === 0) return [];
+
+    const firstCategory = categoriesArray[0];
+    const items = firstCategory.items || [];
+
+    // Get first 4 items and ensure they have proper structure
+    return items.slice(0, 4).map((item) => ({
+      ...item,
+      id:
+        item.id ||
+        `recommended-${item.item_name?.replace(/\s+/g, "-").toLowerCase()}`,
+      price: item.price || "15",
+    }));
+  };
+
+  const recommendedItems = getRecommendedItems();
+
+  // Fallback recommended items if API data is not available
+  const fallbackRecommendedItems = [
+    {
+      id: "dynamite-bowl",
+      item_name: "Dynamite Bowl",
+      description:
+        "Tuna • Shrimp • Carrot • Mango • Jalapeno • Cucumber • Chili Flakes • Sesame Seeds",
+      price: "20",
+      image_url: homeImage,
+    },
+    {
+      id: "duke-bowl",
+      item_name: "The Duke Bowl",
+      description:
+        "Tuna • Salmon • Shrimp • Seaweed • Salad • Jalapeno • Sweet Onion • Edamame • Cucumber",
+      price: "16",
+      image_url: homeImage,
+    },
+    {
+      id: "volcano-bowl",
+      item_name: "Volcano Bowl",
+      description:
+        "Spicy Salmon • Spicy Tuna • Green Onion • Cabbage • Cucumber • Carrot • Jalapeno • Ginger",
+      price: "12",
+      image_url: homeImage,
+    },
+    {
+      id: "salmon-bowl",
+      item_name: "Salmon Bowl",
+      description:
+        "Spicy Salmon • Green Onion • Avocado • Cucumber • Ginger • House Sauce mixed with light sriracha • Furikake • Lemon",
+      price: "15",
+      image_url: homeImage,
+    },
+  ];
+
+  const displayRecommendedItems =
+    recommendedItems.length > 0 ? recommendedItems : fallbackRecommendedItems;
 
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="max-w-md mx-auto">
           <CardBody className="p-8 text-center">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Your cart is empty</h3>
-            <p className="text-gray-600 mb-6">Add some delicious dishes to get started!</p>
-            <Button 
-              as={Link} 
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+              Your cart is empty
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Add some delicious dishes to get started!
+            </p>
+            <Button
+              as={Link}
               to="/menu"
               className="bg-orange-500 hover:bg-orange-600 text-white"
             >
@@ -56,21 +128,25 @@ function Checkout() {
           </CardBody>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column - Order Summary */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Order summary</h2>
-            
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              Order summary
+            </h2>
+
             <div className="space-y-4 mb-8">
               {cartItems.map((item) => (
-                <div key={item.id} className="flex items-center space-x-4 bg-white p-4 rounded-xl">
+                <div
+                  key={item.id}
+                  className="flex items-center space-x-4 bg-white p-4 rounded-xl"
+                >
                   <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100">
                     <img
                       src={item.image_url || item.image || homeImage}
@@ -79,32 +155,50 @@ function Checkout() {
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900">{item.item_name}</h3>
+                    <h3 className="font-semibold text-gray-900">
+                      {item.item_name}
+                    </h3>
                     <p className="text-sm text-gray-600">{item.description}</p>
-                    <p className="text-sm text-gray-500 mt-1">Quantity: {item.quantity}</p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      Quantity: {item.quantity}
+                    </p>
                   </div>
                   <div className="text-xl font-bold text-gray-900">
                     ${(parseFloat(item.price) * item.quantity).toFixed(0)}
                   </div>
                   <div className="flex items-center space-x-2">
                     <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
-                      <button 
+                      <button
                         className="w-8 h-8 flex items-center justify-center hover:bg-gray-200 rounded"
-                        onClick={() => updateQuantity(item.uniqueCartId || item.id, item.quantity - 1)}
+                        onClick={() =>
+                          updateQuantity(
+                            item.uniqueCartId || item.id,
+                            item.quantity - 1
+                          )
+                        }
                       >
                         -
                       </button>
-                      <span className="w-8 text-center font-medium">{item.quantity}</span>
-                      <button 
+                      <span className="w-8 text-center font-medium">
+                        {item.quantity}
+                      </span>
+                      <button
                         className="w-8 h-8 flex items-center justify-center hover:bg-gray-200 rounded"
-                        onClick={() => updateQuantity(item.uniqueCartId || item.id, item.quantity + 1)}
+                        onClick={() =>
+                          updateQuantity(
+                            item.uniqueCartId || item.id,
+                            item.quantity + 1
+                          )
+                        }
                       >
                         +
                       </button>
                     </div>
-                    <button 
+                    <button
                       className="p-2 hover:bg-red-100 rounded text-red-500"
-                      onClick={() => removeFromCart(item.uniqueCartId || item.id)}
+                      onClick={() =>
+                        removeFromCart(item.uniqueCartId || item.id)
+                      }
                       title="Remove item"
                     >
                       🗑️
@@ -119,7 +213,9 @@ function Checkout() {
           <div className="space-y-6">
             {/* Payment Method */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Payment method</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">
+                Payment method
+              </h3>
               <div className="bg-white p-4 rounded-xl border-2 border-gray-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
@@ -182,7 +278,7 @@ function Checkout() {
                   <span className="text-orange-500">${total.toFixed(0)}</span>
                 </div>
               </div>
-              
+
               <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white mt-4 py-3 text-lg font-medium">
                 Proceed to payment
               </Button>
@@ -191,11 +287,13 @@ function Checkout() {
         </div>
 
         {/* You might also like */}
-        {recommendedItems.length > 0 && (
+        {displayRecommendedItems.length > 0 && (
           <div className="mt-16">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">You might also like</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-8">
+              You might also like
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {recommendedItems.map((item) => (
+              {displayRecommendedItems.map((item) => (
                 <div key={item.id} className="text-center">
                   <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-100 mx-auto mb-4">
                     <img
@@ -204,19 +302,31 @@ function Checkout() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h4 className="font-bold text-gray-900 mb-2">{item.item_name}</h4>
-                  <p className="text-sm text-gray-600 mb-3 min-h-[60px]">{item.description}</p>
+                  <h4 className="font-bold text-gray-900 mb-2">
+                    {item.item_name}
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-3 min-h-[60px]">
+                    {item.description}
+                  </p>
                   <div className="text-xl font-bold text-gray-900 mb-3">
                     ${parseFloat(item.price).toFixed(0)}
                   </div>
                   <Button
-                    className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6"
+                    className="bg-white border border-orange-500 text-orange-500 hover:bg-orange-50 rounded-full px-6"
                     size="sm"
-                    onClick={() => addToCart({
-                      ...item,
-                      id: item.id || `recommended-${item.item_name?.replace(/\s+/g, '-').toLowerCase()}`,
-                      uniqueCartId: `recommended-${item.item_name?.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`
-                    })}
+                    onClick={() =>
+                      addToCart({
+                        ...item,
+                        id:
+                          item.id ||
+                          `recommended-${item.item_name
+                            ?.replace(/\s+/g, "-")
+                            .toLowerCase()}`,
+                        uniqueCartId: `recommended-${item.item_name
+                          ?.replace(/\s+/g, "-")
+                          .toLowerCase()}-${Date.now()}`,
+                      })
+                    }
                   >
                     Add to cart
                   </Button>
@@ -226,46 +336,6 @@ function Checkout() {
           </div>
         )}
       </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white mt-16">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center space-x-2">
-              <img src="/src/assets/logo.png" alt="logo" className="w-10 h-10" />
-              <span className="text-xl font-bold">CAFÉ FAUSSE</span>
-            </div>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6">
-              Book a Table
-            </Button>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-semibold mb-4">Menu</h4>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">About Us</h4>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Location</h4>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Reservations</h4>
-            </div>
-          </div>
-          
-          <div className="flex items-center justify-between pt-8 border-t border-gray-700">
-            <div className="text-sm text-gray-400">
-              Washington DC, 1234 Culinary Ave, Suite 100<br />
-              info@cafefausse.com
-            </div>
-            <div className="text-sm text-gray-400">
-              © 2024 Café Fausse • Privacy • Terms • Sitemap
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
-  )
-} 
+  );
+}
