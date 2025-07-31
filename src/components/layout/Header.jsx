@@ -8,12 +8,15 @@ import {
   NavbarMenuItem,
   Button,
   Link as HeroLink,
+  Badge,
 } from "@heroui/react";
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { useCart } from "../../hooks/useCart.jsx";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getCartCount } = useCart();
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -59,26 +62,39 @@ const Header = () => {
         ))}
       </NavbarContent>
 
-      <NavbarContent justify="end" className="gap-3">
-        <NavbarItem className="hidden sm:flex">
-          <Link
-            to="/menu"
-            className="text-gray-700 hover:text-primary transition-colors font-medium"
-          >
-            Order Online
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            as={Link}
-            to="/reservations"
-            className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-full px-6"
-            size="sm"
-          >
-            Book a Table
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
+              <NavbarContent justify="end" className="gap-3">
+          <NavbarItem className="hidden sm:flex">
+            <Link 
+              to="/menu"
+              className="text-gray-700 hover:text-primary transition-colors font-medium"
+            >
+              Order Online
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Badge content={getCartCount()} color="danger" isInvisible={getCartCount() === 0}>
+              <Button 
+                as={Link} 
+                to="/checkout"
+                isIconOnly
+                variant="light"
+                className="text-gray-700 hover:text-primary"
+              >
+                🛒
+              </Button>
+            </Badge>
+          </NavbarItem>
+          <NavbarItem>
+            <Button 
+              as={Link} 
+              to="/reservations"
+              className="bg-gray-900 text-white hover:bg-gray-800 transition-colors rounded-full px-6"
+              size="sm"
+            >
+              Book a Table
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
 
       <NavbarMenu>
         {menuItems.map((item, index) => (

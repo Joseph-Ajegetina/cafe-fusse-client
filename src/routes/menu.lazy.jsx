@@ -1,6 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { Card, CardBody, Button } from '@heroui/react'
 import { useMenu } from '../hooks/useMenu'
+import { useCart } from '../hooks/useCart.jsx'
 
 // Import default image for fallback
 import homeImage from '../assets/images/home-cafe-fausse.webp'
@@ -11,6 +12,7 @@ export const Route = createLazyFileRoute('/menu')({
 
 function Menu() {
   const { data: menu, isLoading, error } = useMenu()
+  const { addToCart } = useCart()
 
   // Transform API data to match expected structure
   const transformApiData = (apiData) => {
@@ -45,8 +47,15 @@ function Menu() {
 
 
 
-  const handleAddToCart = (item) => { // eslint-disable-line no-unused-vars
-    // TODO: Implement cart functionality
+  const handleAddToCart = (item, categoryId) => {
+    // Ensure each item has a unique ID by combining category and item info
+    const itemWithUniqueId = {
+      ...item,
+      id: item.id || `${categoryId}-${item.item_name?.replace(/\s+/g, '-').toLowerCase()}`,
+      uniqueCartId: `${categoryId}-${item.item_name?.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`
+    }
+    
+    addToCart(itemWithUniqueId)
   }
 
   if (isLoading) {
@@ -154,9 +163,9 @@ function Menu() {
                       <Button
                         className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6 py-2"
                         size="sm"
-                        onPress={() => handleAddToCart(item)}
+                        onPress={() => handleAddToCart(item, category.id)}
                       >
-                        Order Now
+                        Add to Cart
                       </Button>
                     </div>
                   </div>

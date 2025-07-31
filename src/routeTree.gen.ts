@@ -16,6 +16,7 @@ import { Route as IndexRouteImport } from './routes/index'
 const ReservationsLazyRouteImport = createFileRoute('/reservations')()
 const MenuLazyRouteImport = createFileRoute('/menu')()
 const GalleryLazyRouteImport = createFileRoute('/gallery')()
+const CheckoutLazyRouteImport = createFileRoute('/checkout')()
 const AboutLazyRouteImport = createFileRoute('/about')()
 
 const ReservationsLazyRoute = ReservationsLazyRouteImport.update({
@@ -33,6 +34,11 @@ const GalleryLazyRoute = GalleryLazyRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/gallery.lazy').then((d) => d.Route))
+const CheckoutLazyRoute = CheckoutLazyRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/checkout.lazy').then((d) => d.Route))
 const AboutLazyRoute = AboutLazyRouteImport.update({
   id: '/about',
   path: '/about',
@@ -47,6 +53,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutLazyRoute
+  '/checkout': typeof CheckoutLazyRoute
   '/gallery': typeof GalleryLazyRoute
   '/menu': typeof MenuLazyRoute
   '/reservations': typeof ReservationsLazyRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutLazyRoute
+  '/checkout': typeof CheckoutLazyRoute
   '/gallery': typeof GalleryLazyRoute
   '/menu': typeof MenuLazyRoute
   '/reservations': typeof ReservationsLazyRoute
@@ -62,21 +70,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutLazyRoute
+  '/checkout': typeof CheckoutLazyRoute
   '/gallery': typeof GalleryLazyRoute
   '/menu': typeof MenuLazyRoute
   '/reservations': typeof ReservationsLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/gallery' | '/menu' | '/reservations'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/checkout'
+    | '/gallery'
+    | '/menu'
+    | '/reservations'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/gallery' | '/menu' | '/reservations'
-  id: '__root__' | '/' | '/about' | '/gallery' | '/menu' | '/reservations'
+  to: '/' | '/about' | '/checkout' | '/gallery' | '/menu' | '/reservations'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/checkout'
+    | '/gallery'
+    | '/menu'
+    | '/reservations'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutLazyRoute: typeof AboutLazyRoute
+  CheckoutLazyRoute: typeof CheckoutLazyRoute
   GalleryLazyRoute: typeof GalleryLazyRoute
   MenuLazyRoute: typeof MenuLazyRoute
   ReservationsLazyRoute: typeof ReservationsLazyRoute
@@ -105,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryLazyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -125,6 +155,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutLazyRoute: AboutLazyRoute,
+  CheckoutLazyRoute: CheckoutLazyRoute,
   GalleryLazyRoute: GalleryLazyRoute,
   MenuLazyRoute: MenuLazyRoute,
   ReservationsLazyRoute: ReservationsLazyRoute,
