@@ -282,7 +282,11 @@ function Checkout() {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white mt-4 py-3 text-lg font-medium">
+              <Button 
+                as={Link}
+                to="/success"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white mt-4 py-3 text-lg font-medium"
+              >
                 Proceed to payment
               </Button>
             </div>

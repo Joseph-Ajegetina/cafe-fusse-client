@@ -13,12 +13,18 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SuccessLazyRouteImport = createFileRoute('/success')()
 const ReservationsLazyRouteImport = createFileRoute('/reservations')()
 const MenuLazyRouteImport = createFileRoute('/menu')()
 const GalleryLazyRouteImport = createFileRoute('/gallery')()
 const CheckoutLazyRouteImport = createFileRoute('/checkout')()
 const AboutLazyRouteImport = createFileRoute('/about')()
 
+const SuccessLazyRoute = SuccessLazyRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/success.lazy').then((d) => d.Route))
 const ReservationsLazyRoute = ReservationsLazyRouteImport.update({
   id: '/reservations',
   path: '/reservations',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryLazyRoute
   '/menu': typeof MenuLazyRoute
   '/reservations': typeof ReservationsLazyRoute
+  '/success': typeof SuccessLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryLazyRoute
   '/menu': typeof MenuLazyRoute
   '/reservations': typeof ReservationsLazyRoute
+  '/success': typeof SuccessLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryLazyRoute
   '/menu': typeof MenuLazyRoute
   '/reservations': typeof ReservationsLazyRoute
+  '/success': typeof SuccessLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -84,8 +93,16 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/menu'
     | '/reservations'
+    | '/success'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/checkout' | '/gallery' | '/menu' | '/reservations'
+  to:
+    | '/'
+    | '/about'
+    | '/checkout'
+    | '/gallery'
+    | '/menu'
+    | '/reservations'
+    | '/success'
   id:
     | '__root__'
     | '/'
@@ -94,6 +111,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/menu'
     | '/reservations'
+    | '/success'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -103,10 +121,18 @@ export interface RootRouteChildren {
   GalleryLazyRoute: typeof GalleryLazyRoute
   MenuLazyRoute: typeof MenuLazyRoute
   ReservationsLazyRoute: typeof ReservationsLazyRoute
+  SuccessLazyRoute: typeof SuccessLazyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/success': {
+      id: '/success'
+      path: '/success'
+      fullPath: '/success'
+      preLoaderRoute: typeof SuccessLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reservations': {
       id: '/reservations'
       path: '/reservations'
@@ -159,6 +185,7 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryLazyRoute: GalleryLazyRoute,
   MenuLazyRoute: MenuLazyRoute,
   ReservationsLazyRoute: ReservationsLazyRoute,
+  SuccessLazyRoute: SuccessLazyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
