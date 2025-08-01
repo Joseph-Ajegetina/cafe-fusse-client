@@ -1,10 +1,8 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { Card, CardBody, Button, Image } from '@heroui/react'
+import { Card, CardBody, Button } from '@heroui/react'
 import { useMenu } from '../hooks/useMenu'
 import { useCart } from '../hooks/useCart.jsx'
-
-// Import default image for fallback
-import homeImage from '../assets/images/home-cafe-fausse.webp'
+import MenuCard from '../components/common/MenuCard'
 
 export const Route = createLazyFileRoute('/menu')({
   component: Menu,
@@ -124,41 +122,12 @@ function Menu() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {category.items?.length > 0 ? (
                 category.items.map((item) => (
-                  <div key={item.id} className="text-center p-6 border border-gray-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow duration-300">
-                    {/* Item Image */}
-                    <div className="mb-4 flex justify-center">
-                      <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
-                        <Image
-                          src={item.image_url || item.image}
-                          alt={item.item_name || 'Menu item'}
-                          className="w-full h-full object-cover"
-                          fallbackSrc={homeImage}
-                          radius="full"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Item Info */}
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-bold text-gray-900">
-                        {item.item_name}
-                      </h3>
-                      
-                      <p className="text-sm text-gray-600 leading-relaxed min-h-[60px]">
-                        {item.description}
-                      </p>
-
-                      {/* Order Button */}
-                      <Button
-                        className="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-6 py-2"
-                        size="sm"
-                        onPress={() => handleAddToCart(item, category.id)}
-                      >
-                        Add to Cart
-                      </Button>
-                    </div>
-                  </div>
+                  <MenuCard
+                    key={item.id}
+                    item={item}
+                    categoryId={category.id}
+                    onAddToCart={handleAddToCart}
+                  />
                 ))
               ) : (
                 <div className="col-span-full text-center py-12">

@@ -3,6 +3,7 @@ import { Card, CardBody, Button, Input, Image } from "@heroui/react";
 import { useCart } from "../hooks/useCart.jsx";
 import { useMenu } from "../hooks/useMenu";
 import { useState } from "react";
+import MenuCard from "../components/common/MenuCard";
 
 // Import default image for fallback
 import homeImage from "../assets/images/home-cafe-fausse.webp";
@@ -12,7 +13,7 @@ export const Route = createLazyFileRoute("/checkout")({
 });
 
 function Checkout() {
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal, addToCart } =
+  const { cartItems, removeFromCart, updateQuantity, getCartTotal } =
     useCart();
   const { data: menu } = useMenu();
   const [voucher, setVoucher] = useState("");
@@ -301,41 +302,12 @@ function Checkout() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {displayRecommendedItems.map((item) => (
-                <div key={item.id} className="text-center">
-                  <div className="w-48 h-48 rounded-full overflow-hidden bg-gray-100 mx-auto mb-4">
-                    <Image
-                      src={item.image_url || item.image}
-                      alt={item.item_name || 'Recommended item'}
-                      className="w-full h-full object-cover"
-                      fallbackSrc={homeImage}
-                      radius="full"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h4 className="font-bold text-gray-900 mb-2">
-                    {item.item_name}
-                  </h4>
-                  <p className="text-sm text-gray-600 mb-3 min-h-[60px]">
-                    {item.description}
-                  </p>
-                  <div className="text-xl font-bold text-gray-900 mb-3">
-                    ${parseFloat(item.price).toFixed(0)}
-                  </div>
-                  <Button
-                    className="bg-white border border-orange-500 text-orange-500 hover:bg-orange-50 rounded-full px-6"
-                    size="sm"
-                                         onClick={() => {
-                       const consistentId = `recommended-${item.item_name?.replace(/\s+/g, "-").toLowerCase()}`
-                       addToCart({
-                         ...item,
-                         id: item.id || consistentId,
-                         uniqueCartId: consistentId,
-                       })
-                     }}
-                  >
-                    Add to cart
-                  </Button>
-                </div>
+                <MenuCard
+                  key={item.id}
+                  item={item}
+                  categoryId="recommended"
+                  className="max-w-sm mx-auto"
+                />
               ))}
             </div>
           </div>

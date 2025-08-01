@@ -9,18 +9,14 @@ const ContactSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left: Location Info */}
             <div className="space-y-8">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-6">Find our locations</h2>
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">Location</h2>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Serving fresh fish daily at Boston Harbor Islands, Boylston St, 
-                Congress St, Kendall Square, Cambridge St, Haviland St.
+              <span className="font-bold">1234 Culinary Ave, Suite 100, Washington, DC 20002</span>
+              <br />
+              <span className="font-bold">Phone: (202) 555-4567</span>
+              <br />
+              <span className="font-bold">Hours: Monday–Saturday: 5:00PM – 11:00 PM; <br /> Sunday: 5:00 PM – 9:00 PM</span>
               </p>
-              
-              <Button 
-                className="rounded-full px-8 py-4 font-medium bg-orange-500 hover:bg-orange-600 text-white"
-                size="lg"
-              >
-                Locations & Hours
-              </Button>
             </div>
             
             {/* Right: Food Images */}
