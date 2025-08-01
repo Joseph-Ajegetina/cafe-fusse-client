@@ -48,11 +48,12 @@ function Menu() {
 
 
   const handleAddToCart = (item, categoryId) => {
-    // Ensure each item has a unique ID by combining category and item info
+    // Ensure each item has a consistent ID by combining category and item info (no timestamp)
+    const consistentId = `${categoryId}-${item.item_name?.replace(/\s+/g, '-').toLowerCase()}`
     const itemWithUniqueId = {
       ...item,
-      id: item.id || `${categoryId}-${item.item_name?.replace(/\s+/g, '-').toLowerCase()}`,
-      uniqueCartId: `${categoryId}-${item.item_name?.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`
+      id: item.id || consistentId,
+      uniqueCartId: consistentId
     }
     
     addToCart(itemWithUniqueId)

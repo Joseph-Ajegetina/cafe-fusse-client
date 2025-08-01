@@ -324,19 +324,14 @@ function Checkout() {
                   <Button
                     className="bg-white border border-orange-500 text-orange-500 hover:bg-orange-50 rounded-full px-6"
                     size="sm"
-                    onClick={() =>
-                      addToCart({
-                        ...item,
-                        id:
-                          item.id ||
-                          `recommended-${item.item_name
-                            ?.replace(/\s+/g, "-")
-                            .toLowerCase()}`,
-                        uniqueCartId: `recommended-${item.item_name
-                          ?.replace(/\s+/g, "-")
-                          .toLowerCase()}-${Date.now()}`,
-                      })
-                    }
+                                         onClick={() => {
+                       const consistentId = `recommended-${item.item_name?.replace(/\s+/g, "-").toLowerCase()}`
+                       addToCart({
+                         ...item,
+                         id: item.id || consistentId,
+                         uniqueCartId: consistentId,
+                       })
+                     }}
                   >
                     Add to cart
                   </Button>
