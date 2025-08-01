@@ -8,35 +8,6 @@ export const Route = createLazyFileRoute('/about')({
 })
 
 function About() {
-  const achievements = [
-    { 
-      name: "Michelin Star", 
-      year: "2023",
-      quote: "An exceptional culinary journey that tantalizes the senses. A well-deserved star for their innovation and quality.",
-      icon: "⭐",
-      bgColor: "bg-yellow-100",
-      iconBg: "bg-slate-700",
-      titleColor: "text-amber-800"
-    },
-    { 
-      name: "Best Italian Restaurant", 
-      year: "2022",
-      quote: "A true taste of Italy. Their authentic flavors and warm hospitality make them stand out as the best in the city.",
-      icon: "🏆",
-      bgColor: "bg-blue-100",
-      iconBg: "bg-amber-600",
-      titleColor: "text-blue-800"
-    },
-    { 
-      name: "Chef's Choice Award", 
-      year: "2021",
-      quote: "Voted by peers as a master of the craft. The chef's dedication to perfection is evident in every single dish.",
-      icon: "👨‍🍳",
-      bgColor: "bg-pink-100",
-      iconBg: "bg-amber-500",
-      titleColor: "text-pink-800"
-    }
-  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -243,41 +214,7 @@ function About() {
         </div>
       </section>
 
-      {/* Awards & Recognition */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">Awards & Recognition</h2>
-          <p className="text-lg text-gray-600 mb-16 leading-relaxed max-w-3xl mx-auto">
-            Our commitment to culinary excellence has been recognized by industry leaders and food critics alike.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {achievements.map((achievement, index) => (
-              <div key={index} className={`${achievement.bgColor} rounded-3xl p-8 h-full flex flex-col items-center text-center`}>
-                {/* Award Icon */}
-                <div className={`${achievement.iconBg} w-20 h-20 rounded-full flex items-center justify-center mb-6`}>
-                  <span className="text-2xl text-white">{achievement.icon}</span>
-                </div>
-                
-                {/* Award Title */}
-                <h3 className={`text-2xl font-bold ${achievement.titleColor} mb-2`}>
-                  {achievement.name}
-                </h3>
-                
-                {/* Year */}
-                <p className={`text-lg font-semibold ${achievement.titleColor} mb-6 opacity-80`}>
-                  {achievement.year}
-                </p>
-                
-                {/* Quote */}
-                <blockquote className={`${achievement.titleColor} italic leading-relaxed flex-1 flex items-center`}>
-                  "{achievement.quote}"
-                </blockquote>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Find Our Locations */}
       <ContactSection />

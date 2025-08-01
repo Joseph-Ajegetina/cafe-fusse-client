@@ -1,10 +1,10 @@
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
+import { 
+  Navbar, 
+  NavbarBrand, 
+  NavbarContent, 
+  NavbarItem, 
+  NavbarMenuToggle, 
+  NavbarMenu, 
   NavbarMenuItem,
   Button,
   Link as HeroLink,
@@ -29,14 +29,14 @@ const Header = () => {
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} maxWidth="full">
-      <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden text-gray-700 hover:text-primary transition-colors"
-        />
-        <NavbarBrand>
-          <Link to="/" className="focus-ring rounded-lg">
-            <div className="flex items-center space-x-2">
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden text-gray-700 hover:text-primary transition-colors"
+          />
+          <NavbarBrand>
+            <Link to="/" className="focus-ring rounded-lg">
+              <div className="flex items-center space-x-2">
               <Image
                 src="https://res.cloudinary.com/duym3iexv/image/upload/v1753926638/cafe-fusse/logo_labmbf.png"
                 alt="Café Fausse Logo"
@@ -45,27 +45,27 @@ const Header = () => {
                 radius="sm"
               />
               <p className="font-bold text-xl text-gray-900">CAFÉ FAUSSE</p>
-            </div>
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-8" justify="center">
-        {menuItems.map((item) => (
-          <NavbarItem key={item.path}>
-            <Link
-              to={item.path}
-              activeProps={{
-                className: "text-primary font-semibold",
-              }}
-            >
-              {item.name}
+              </div>
             </Link>
-          </NavbarItem>
-        ))}
-      </NavbarContent>
+          </NavbarBrand>
+        </NavbarContent>
 
-              <NavbarContent justify="end" className="gap-3">
+        <NavbarContent className="hidden sm:flex gap-8" justify="center">
+          {menuItems.map((item) => (
+            <NavbarItem key={item.path}>
+              <Link 
+                to={item.path}
+                activeProps={{
+                className: "text-primary font-semibold",
+                }}
+              >
+                {item.name}
+              </Link>
+            </NavbarItem>
+          ))}
+        </NavbarContent>
+
+        <NavbarContent justify="end" className="gap-3">
           <NavbarItem className="hidden sm:flex">
             <Link 
               to="/menu"
@@ -99,32 +99,32 @@ const Header = () => {
           </NavbarItem>
         </NavbarContent>
 
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item.name}-${index}`}>
-            <Link
-              to={item.path}
-              className="w-full text-lg text-gray-700 hover:text-primary transition-colors focus-ring rounded px-2 py-1"
-              size="lg"
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item.name}-${index}`}>
+              <Link
+                to={item.path}
+                className="w-full text-lg text-gray-700 hover:text-primary transition-colors focus-ring rounded px-2 py-1"
+                size="lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+          <NavbarMenuItem>
+            <Button 
+              as={Link}
+              to="/reservations"
+              color="primary"
+              className="w-full transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              {item.name}
-            </Link>
+              Make Reservation
+            </Button>
           </NavbarMenuItem>
-        ))}
-        <NavbarMenuItem>
-          <Button
-            as={Link}
-            to="/reservations"
-            color="primary"
-            className="w-full transition-colors"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Make Reservation
-          </Button>
-        </NavbarMenuItem>
-      </NavbarMenu>
-    </Navbar>
+        </NavbarMenu>
+      </Navbar>
   );
 };
 
