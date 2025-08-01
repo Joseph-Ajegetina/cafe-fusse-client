@@ -171,47 +171,22 @@ function Reservations() {
 
                   {/* Available Time Slots */}
                   {formData.date && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Available Times {slotsLoading && <span className="text-sm text-gray-500">(loading...)</span>}
-                      </label>
-                      
-                      {/* Debug info */}
-                      <div className="text-xs text-gray-500 mb-2">
-                        Debug: {timeSlots.length} slots available
-                      </div>
-                      
-                      {timeSlots.length > 0 ? (
-                        <div className="grid grid-cols-3 gap-2">
-                          {timeSlots.map((slot) => (
-                            <button
-                              key={slot}
-                              type="button"
-                              onClick={() => handleInputChange('time', slot)}
-                              className={`p-2 text-sm rounded-lg border transition-colors ${
-                                formData.time === slot
-                                  ? 'bg-primary text-white border-primary'
-                                  : 'bg-white text-gray-700 border-gray-300 hover:border-primary'
-                              }`}
-                              disabled={createReservationMutation.isPending}
-                            >
-                              {slot}
-                            </button>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-gray-500 text-sm">
-                          {slotsLoading ? 'Loading available times...' : 'No time slots available for this date'}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  
-                  {/* Debug: Show when no date selected */}
-                  {!formData.date && (
-                    <div className="text-xs text-gray-400">
-                      Select a date to see available time slots
-                    </div>
+                    <Select
+                      label={`Available Times ${slotsLoading ? '(loading...)' : ''}`}
+                      placeholder={slotsLoading ? "Loading times..." : "Select a time"}
+                      selectedKeys={formData.time ? [formData.time] : []}
+                      onSelectionChange={(keys) => handleInputChange('time', Array.from(keys)[0] || '')}
+                      variant="bordered"
+                      isRequired
+                      isDisabled={createReservationMutation.isPending || slotsLoading || timeSlots.length === 0}
+                      isLoading={slotsLoading}
+                    >
+                      {timeSlots.map((slot) => (
+                        <SelectItem key={slot} value={slot}>
+                          {slot}
+                        </SelectItem>
+                      ))}
+                    </Select>
                   )}
                 </div>
 
