@@ -2,7 +2,6 @@ import { Button, Image } from '@heroui/react'
 import { useCart } from '../../hooks/useCart.jsx'
 
 // Import default image for fallback
-import homeImage from '../../assets/images/home-cafe-fausse.webp'
 
 const MenuCard = ({ 
   item, 
@@ -42,9 +41,7 @@ const MenuCard = ({
             src={item.image_url || item.image}
             alt={item.item_name || 'Menu item'}
             className="w-full h-full object-cover"
-            fallbackSrc={homeImage}
             radius="none"
-            loading="lazy"
           />
         </div>
         {/* Price Badge */}

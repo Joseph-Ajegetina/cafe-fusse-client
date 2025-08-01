@@ -153,9 +153,7 @@ function Checkout() {
                       src={item.image_url || item.image}
                       alt={item.item_name || 'Cart item'}
                       className="w-full h-full object-cover"
-                      fallbackSrc={homeImage}
                       radius="full"
-                      loading="lazy"
                     />
                   </div>
                   <div className="flex-1">

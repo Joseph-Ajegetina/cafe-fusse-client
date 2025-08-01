@@ -64,9 +64,7 @@ const MenuPreview = () => {
                     src={dish.image}
                     alt={dish.name || 'Featured dish'}
                     className="w-full h-full object-cover"
-                    fallbackSrc="https://via.placeholder.com/192x192/f3f4f6/6b7280?text=Dish"
                     radius="full"
-                    loading="lazy"
                   />
                 </div>
                 {dish.popular && (
