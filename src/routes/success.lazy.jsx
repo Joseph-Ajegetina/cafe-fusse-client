@@ -41,22 +41,6 @@ function Success() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <Image
-              src="https://res.cloudinary.com/duym3iexv/image/upload/v1753926638/cafe-fusse/logo_labmbf.png"
-              alt="Café Fausse Logo"
-              className="w-8 h-8"
-              fallbackSrc="https://via.placeholder.com/32x32/f97316/ffffff?text=CF"
-              radius="sm"
-            />
-            <span className="text-xl font-bold text-gray-900">CAFÉ FAUSSE</span>
-          </div>
-          <div className="w-8 h-8 bg-orange-500 rounded-full"></div>
-        </div>
-      </div>
 
       <div className="max-w-2xl mx-auto px-4 py-16">
         {/* Success Icon and Message */}
